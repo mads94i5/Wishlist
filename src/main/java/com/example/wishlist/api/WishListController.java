@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class WishListController {
-  @GetMapping("/wishlist/wishlist")
+  @GetMapping("/wishlist")
   public String wishlist(){
     return "wishlist/wishlist";
   }
 
-@GetMapping("/wishlist/create-wishlist")
+@GetMapping("/create-wishlist")
   public String createWishList(){
     return "wishlist/create-wishlist";
   }

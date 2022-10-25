@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class UserController {
 
-  @GetMapping("user/create-user")
+  @GetMapping("/create-user")
   public String createUser(){
     return "user/create-user";
   }
 
-  @GetMapping("user/login")
+  @GetMapping("/login")
   public String login(){
     return "user/login";
   }
