@@ -9,5 +9,11 @@
 <body>
 <div th:insert="fragments/navbar :: navbar"></div>
 
+<form action="/action_page.php">
+<label >Username: <input type="text" name="username"><br><br></label>
+<label >Password: <input type="text" name="password"><br><br></label>
+<input type="submit" value="Login">
+</form>
+
 </body>
 </html>
