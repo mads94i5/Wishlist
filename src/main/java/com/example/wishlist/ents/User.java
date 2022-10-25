@@ -1,19 +1,30 @@
 package com.example.wishlist.ents;
 
+import java.util.Collection;
+
 public class User {
     private Long id;
     private String userName;
     private String password;
     private int wishlistId;
+    private Collection<Role> roles;
 
     public User() {
     }
 
-    public User(Long id, String userName, String password, int wishlistId) {
+    public User(String userName, String password, int wishlistId, Collection<Role> roles) {
+        this.userName = userName;
+        this.password = password;
+        this.wishlistId = wishlistId;
+        this.roles = roles;
+    }
+
+    public User(Long id, String userName, String password, int wishlistId, Collection<Role> roles) {
         this.id = id;
         this.userName = userName;
         this.password = password;
         this.wishlistId = wishlistId;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -46,5 +57,13 @@ public class User {
 
     public void setWishlistId(int wishlistId) {
         this.wishlistId = wishlistId;
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 }

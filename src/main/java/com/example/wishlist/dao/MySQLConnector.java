@@ -1,10 +1,9 @@
 package com.example.wishlist.dao;
 
 import org.springframework.beans.factory.annotation.Value;
-
 import java.sql.*;
 
-public class Connector {
+public class MySQLConnector {
     @Value("${spring.datasource.url}")
     private String url;
     @Value("${spring.datasource.username}")
