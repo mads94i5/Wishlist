@@ -1,8 +1,7 @@
 nav {
-    background-color: black;
+    background-color: lightgrey;
     text-align: center;
     width: 100%;
-    padding: 16px;
     position: sticky;
     top: 0px;
 }
@@ -13,8 +12,12 @@ nav a {
 }
 
 input[type=button]{
-    background-color: black;
+    background-color: darkgray;
     color: white;
+    height: 50px;
+    min-width: 100px;
+    padding: 0;
+    border: none;
 }
 
 input[type=button]:hover {
