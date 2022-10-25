@@ -1,7 +1,7 @@
 package com.example.wishlist.ents;
 
-import java.util.List;
+import java.util.Collection;
 
 public class Wishlist {
-    private List<WishlistItem> items;
+    private Long wishlistId;
 }
