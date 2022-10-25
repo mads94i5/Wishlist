@@ -81,7 +81,7 @@ public class UserRepository {
             Connection conn = new MySQLConnector().getConnection();
 
             String query = "UPDATE users " +
-                    "SET user_name=?, password=?, wishlist_id=? WHERE id=?";
+                    "SET user_name=?, user_password=?, wishlist_id=? WHERE id=?";
             PreparedStatement psts = conn.prepareStatement(query);
 
             psts.setString(1, user.getUserName());
