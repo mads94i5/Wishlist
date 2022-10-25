@@ -1,11 +1,38 @@
 nav {
+    background-color: black;
     text-align: center;
     width: 100%;
-
+    padding: 16px;
     position: sticky;
     top: 0px;
 }
 
+nav a {
+    color: black;
+    margin: 0px 5%;
+}
+
+input[type=button]{
+    background-color: black;
+    color: white;
+}
+
+input[type=button]:hover {
+    background-color: grey;
+    text-decoration: underline;
+}
+
 nav a:hover {
     text-decoration: underline;
+}
+
+body{
+    margin: 0px;
+}
+
+.navbarimage{
+    position:absolute;
+    left:10px;
+    top:10px;
+    margin: 0px 15px 15px 0px;
 }
