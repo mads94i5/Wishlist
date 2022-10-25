@@ -50,6 +50,7 @@ public class UserRepository {
     }
     public void update(User user) {
         try {
+            //TODO, change connection to another service than pokedex
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pokedex", "root", "test");
 
             String query = "UPDATE users " +
