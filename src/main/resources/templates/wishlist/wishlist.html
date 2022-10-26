@@ -4,10 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <title>Title</title>
+    <title>Wishlist</title>
 </head>
 <body>
 <div th:insert="fragments/navbar :: navbar"></div>
+
+<div>
+<table class="table">
+    <tr>
+        <th>Nr.</th>
+        <th style="width: 200px">Beskrivelse</th>
+        <th style="width: 75px">Pris</th>
+        <th style="width: 200px">Link</th>
+        <th style="width: 200px">Kommentar</th>
+    </tr>
+    <tr th:each="i : ${wishlist}">
+        <td th:text="${i.id}">Nr.</td>
+        <td th:text="${i.description}">Beskrivelse</td>
+        <td th:text="${i.price}">Pris</td>
+        <td th:text="${i.itemlink}">Link</td>
+        <td th:text="${i.comment}">Kommentar</td>
+    </tr>
+</table>
+</div>
 <div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>

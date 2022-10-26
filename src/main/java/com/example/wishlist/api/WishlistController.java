@@ -13,6 +13,13 @@ public class WishlistController {
   public WishlistController(WishlistRepository w) {
     wishlistRepository = w;
   }
+
+  //Nedenstående skal  metode slettes, kun tilføjet for at kunne se om tabel virkede.
+  @GetMapping("/wishlist")
+  public String wishlist(){
+    return "wishlist/wishlist";
+  }
+
   @GetMapping("/wishlist/{id}")
   public String showWishlist(@PathVariable("id") Long id, Model model) {
     model.addAttribute("wishlist", wishlistRepository.findById(id));
