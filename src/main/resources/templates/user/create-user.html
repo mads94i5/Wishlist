@@ -9,5 +9,17 @@
 <body>
 <div th:insert="fragments/navbar :: navbar"></div>
 <div th:insert="fragments/footer :: footer"></div>
+
+<form th:action="@{/create-user}" method="post" th:object="${user}">
+    <!--<label>E-mail address: <input type="text" name="email"><br><br></label> -->
+    <label>Username: <input type="text" name="username"><br><br></label>
+    <label>Password: <input type="password" id="password" name="password"><br><br></label>
+    <input type="submit" value="Register">
+
+
+
+</form>
+
+
 </body>
 </html>
