@@ -3,14 +3,14 @@ USE wishingwell;
 
 CREATE TABLE IF NOT EXISTS wishlists
 (
-  id        			BIGINT          PRIMARY KEY
+  id        			BIGINT          PRIMARY KEY 	NOT NULL 	AUTO_INCREMENT
 );
 
 CREATE TABLE IF NOT EXISTS wishes
 (
   id        			BIGINT          PRIMARY KEY 	NOT NULL 	AUTO_INCREMENT,
-  item_description		VARCHAR(50),
-  price					INT,
+  item_description		VARCHAR(50)     NOT NULL,
+  price					DOUBLE,
   url					VARCHAR(255),
   item_comment			VARCHAR(255),
   reserved				BIT(1),
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS users
   id        			BIGINT          PRIMARY KEY 	NOT NULL 	AUTO_INCREMENT,
   user_name   			VARCHAR(50)     UNIQUE,
   user_password			VARCHAR(50),
-  wishlist_id			BIGINT			NOT NULL,
+  wishlist_id			BIGINT,
   CONSTRAINT wishlist_user
     FOREIGN KEY (wishlist_id) REFERENCES wishlists(id)
 );
