@@ -1,26 +1,40 @@
 nav {
+    background-color: lightgrey;
     text-align: center;
     width: 100%;
-
     position: sticky;
     top: 0px;
 }
 
-p {
-    text-align: center;
+nav a {
+    color: black;
+    margin: 0px 5%;
 }
 
+input[type=button]{
+    background-color: darkgray;
+    color: white;
+    height: 50px;
+    min-width: 100px;
+    padding: 0;
+    border: none;
+}
+
+input[type=button]:hover {
+    background-color: grey;
+    text-decoration: underline;
+}
 
 nav a:hover {
     text-decoration: underline;
 }
 
-#title{
-    font-size: 36px;
-    text-align: center;
+body{
+    margin: 0px;
 }
 
-#sub-title{
-    font-size: 24px;
-    text-align: center;
+.navbarimage{
+    position:absolute;
+    left:10px;
+    top:8px;
 }
