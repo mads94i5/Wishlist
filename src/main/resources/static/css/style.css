@@ -6,6 +6,18 @@ nav {
     top: 0px;
 }
 
+#title{
+    text-align: center;
+}
+
+#sub-title{
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+
 nav a {
     color: black;
     margin: 0px 5%;
