@@ -38,3 +38,62 @@ body{
     left:10px;
     top:8px;
 }
+
+.row{
+    margin-top: 120px;
+    display: flex;
+}
+
+.column {
+    flex: 50%;
+    margin-right: 30px;
+    margin-left: 120px;
+}
+
+.column2 {
+    flex: 50%;
+    margin-right: 120px;
+    margin-left: 30px;
+    text-align: justify;
+}
+
+footer{
+    background: darkgray;
+    margin-top: -5px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    min-height: 7em;
+    max-height: 6em;
+    font-size: 0.8em;
+}
+footer a{
+    padding-right: 1em;
+}
+.footer-logo {
+    margin-left: 2em;
+    padding-top: 1.5em;
+    color: white;
+    object-position: bottom;
+    position: fixed;
+}
+.footer-middle-column {
+    text-align: center;
+    width: 45%;
+    margin: -0.5em 25% -6.5em;
+}
+.footer-right-column {
+    float: right;
+    width: 20%;
+    margin-bottom: 10em;
+    margin-top: -0.5em;
+    margin-right: 1em;
+    min-width: 120px;
+}
+.footer-background {
+    background: darkgray;
+}
+.footer-text {
+    text-align: center;
+    color: white;
+}
