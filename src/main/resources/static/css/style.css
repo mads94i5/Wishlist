@@ -59,21 +59,17 @@ body{
 
 footer{
     background: darkgray;
-    margin-top: -5px;
     position: fixed;
-    bottom: 0;
+    bottom: 0px;
     width: 100%;
     min-height: 7em;
     max-height: 6em;
     font-size: 0.8em;
 }
-footer a{
-    padding-right: 1em;
-}
+
 .footer-logo {
     margin-left: 2em;
     padding-top: 1.5em;
-    color: white;
     object-position: bottom;
     position: fixed;
 }
@@ -88,11 +84,8 @@ footer a{
     margin-bottom: 10em;
     margin-top: -0.5em;
     margin-right: 1em;
-    min-width: 120px;
 }
-.footer-background {
-    background: darkgray;
-}
+
 .footer-text {
     text-align: center;
     color: white;
