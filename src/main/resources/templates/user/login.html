@@ -12,12 +12,13 @@
 <form action="/action_page.php">
     <label>Username: <input type="text" name="username"><br><br></label>
 
-    <label>Password: <input type="password" name="password-field"><br><br></label>
+    <label>Password: <input id="password" type="password" name="password-field"><br><br></label>
 
     <input type="submit" value="Login">
 
     <!--Password visibility toggle -->
     <input type="checkbox" onClick="togglePasswordVisibility()">Show Password
+
     <script>
         function togglePasswordVisibility() {
             var x = document.getElementById("password");
