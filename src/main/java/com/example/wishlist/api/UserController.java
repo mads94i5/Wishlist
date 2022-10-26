@@ -22,14 +22,20 @@ public class UserController {
     return "user/create-user";
   }
 
+  @PostMapping("/create-user")
+  public String registerUserAccount(@ModelAttribute("user") UserDto userDto) {
+    userService.create(userDto);
+    return "redirect:/create-user?success";
+  }
+
   @GetMapping("/login")
-  public String login(){
+  public String showLogin() {
     return "user/login";
   }
 
-  @PostMapping
-  public String registerUserAccount(@ModelAttribute("user") UserDto userDto) {
-    userService.create(userDto);
-    return "redirect:/register?success";
+  @PostMapping("/login")
+  public String loginUserAccount(@ModelAttribute("user") UserDto userDto) {
+    userService.loadUserByUsername(userDto.getUserName());
+    return "redirect:/";
   }
 }

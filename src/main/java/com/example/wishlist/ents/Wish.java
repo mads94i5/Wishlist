@@ -2,20 +2,17 @@ package com.example.wishlist.ents;
 
 import java.net.URL;
 
-public class WishlistItem {
-
-  private Long itemId;
+public class Wish {
+  private Long id;
   private String description;
   private double price;
   private URL itemLink;
   private String comment;
   private boolean reserved;
-
   private Long wishListId;
 
-
-  public WishlistItem(Long itemId, String description, double price, URL itemLink, String comment, boolean reserved, Long wishListId) {
-    this.itemId = itemId;
+  public Wish(Long id, String description, double price, URL itemLink, String comment, boolean reserved, Long wishListId) {
+    this.id = id;
     this.description = description;
     this.price = price;
     this.itemLink = itemLink;
@@ -24,7 +21,7 @@ public class WishlistItem {
     this.wishListId = wishListId;
   }
 
-  public WishlistItem() {
+  public Wish() {
   }
 
   public String getDescription() {
@@ -67,12 +64,12 @@ public class WishlistItem {
     this.reserved = reserved;
   }
 
-  public Long getItemId() {
-    return itemId;
+  public Long getId() {
+    return id;
   }
 
-  public void setItemId(Long itemId) {
-    this.itemId = itemId;
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public Long getWishListId() {
