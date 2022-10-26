@@ -10,9 +10,25 @@
 <div th:insert="fragments/navbar :: navbar"></div>
 
 <form action="/action_page.php">
-<label >Username: <input type="text" name="username"><br><br></label>
-<label >Password: <input type="text" name="password"><br><br></label>
-<input type="submit" value="Login">
+    <label>Username: <input type="text" name="username"><br><br></label>
+
+    <label>Password: <input type="password" name="password-field"><br><br></label>
+
+    <input type="submit" value="Login">
+
+    <!--Password visibility toggle -->
+    <input type="checkbox" onClick="togglePasswordVisibility()">Show Password
+    <script>
+        function togglePasswordVisibility() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+
 </form>
 
 </body>
