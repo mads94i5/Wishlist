@@ -14,11 +14,18 @@ nav {
     text-align: center;
 }
 
-.invalid_pass{
+.invalid_login{
     position: absolute;
     top: 68%;
     left: 50%;
     color: red;
+}
+
+.valid_login{
+    position: absolute;
+    top: 68%;
+    left: 50%;
+    color: green;
 }
 
 .sign-up-or-in {

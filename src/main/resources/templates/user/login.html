@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <title>Title</title>
+    <title>Login</title>
 </head>
 <body>
 
@@ -14,17 +14,20 @@
 
 <div class="sign-up-or-in">
     <h1>Login</h1>
-    <div class="invalid_pass" th:if="${param.error}">
-        Invalid username and password
+    <div class="invalid_login" th:if="${param.error}">
+        Invalid credentials
     </div>
-    <form th:action="@{/login}" method="post">
+    <div class="valid_login" th:if="${param.success}">
+        Successfully logged in
+    </div>
+    <form th:action="@{/login}" method="post" th:object="${user}">
         <div class="text-field">
-            <input type="text" required>
+            <input th:field="*{userName}" type="text" required>
             <span></span>
             <label>Username</label>
         </div>
         <div class="text-field">
-            <input id="password" type="password" required>
+            <input th:field="*{password}" id="password" type="password" required>
             <span></span>
             <label>Password</label>
         </div>
