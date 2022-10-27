@@ -7,35 +7,29 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class UserController {
+@RequestMapping("/create-user")
+public class UserCreateController {
 
   private final UserService userService;
 
-  public UserController(UserService userService) {
+  public UserCreateController(UserService userService) {
     this.userService = userService;
   }
-  @GetMapping("/create-user")
+  @GetMapping
   public String showCreateUser(Model model) {
     model.addAttribute("user", new UserDto());
     return "user/create-user";
   }
 
-  @PostMapping("/create-user")
+  @PostMapping
   public String registerUserAccount(@ModelAttribute("user") UserDto userDto) {
     userService.create(userDto);
     return "redirect:/create-user?success";
   }
 
-  @GetMapping("/login")
-  public String showLogin() {
-    return "user/login";
-  }
 
-  @PostMapping("/login")
-  public String loginUserAccount(@ModelAttribute("user") UserDto userDto) {
-    userService.loadUserByUsername(userDto.getUserName());
-    return "redirect:/";
-  }
+
 }
