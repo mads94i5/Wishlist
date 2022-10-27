@@ -2,6 +2,7 @@ package com.example.wishlist.dao;
 
 import com.example.wishlist.ents.Role;
 import com.example.wishlist.ents.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -11,6 +12,9 @@ import java.util.List;
 
 @Repository
 public class UserRepository {
+
+    @Value("${spring.datasource.url}")
+    private String db_url;
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
         try {
@@ -25,7 +29,7 @@ public class UserRepository {
                 String password = resultSet.getString(3);
                 int wishlistId = resultSet.getInt(4);
                 Collection<Role> roles = (Collection<Role>) new Role(resultSet.getString(5));
-                users.add(new User(id, userName, password, wishlistId, roles));
+                users.add(new User(id, userName, password, wishlistId));
             }
         } catch (SQLException e) {
             System.out.println("Cannot connect to database.");
@@ -36,7 +40,8 @@ public class UserRepository {
     public User findByUserName(String searchUserName) {
         User user = new User();
         try {
-            Connection conn = new MySQLConnector().getConnection();
+            // Connection conn = new MySQLConnector().getConnection();
+            Connection conn = DriverManager.getConnection(db_url, "root", "test");
 
             PreparedStatement psts = conn.prepareStatement("SELECT * FROM users WHERE user_name=?");
 
@@ -50,7 +55,7 @@ public class UserRepository {
                 String password = resultSet.getString(3);
                 int wishlistId = resultSet.getInt(4);
                 Collection<Role> roles = (Collection<Role>) new Role(resultSet.getString(5));
-                user = new User(id, userName, password, wishlistId, roles);
+                user = new User(id, userName, password, wishlistId);
             }
         } catch (SQLException e) {
             System.out.println("Cannot connect to database.");
@@ -60,14 +65,14 @@ public class UserRepository {
     }
     public User create(User newUser) {
         try {
-            Connection conn = new MySQLConnector().getConnection();
+            // Connection conn = new MySQLConnector().getConnection();
+            Connection conn = DriverManager.getConnection(db_url, "root", "test");
 
-            String query = "INSERT INTO users (user_name, password, wishlist_id) VALUES (?, ?, ?)";
+            String query = "INSERT INTO users (user_name, user_password) VALUES (?, ?)";
             PreparedStatement psts = conn.prepareStatement(query);
 
             psts.setString(1, newUser.getUserName());
             psts.setString(2, newUser.getPassword());
-            psts.setInt(3, newUser.getWishlistId());
 
             psts.executeUpdate();
         } catch (SQLException e) {

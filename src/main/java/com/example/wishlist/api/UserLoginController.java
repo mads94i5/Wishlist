@@ -2,6 +2,7 @@ package com.example.wishlist.api;
 
 import com.example.wishlist.dao.UserDto;
 import com.example.wishlist.srvs.UserService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,6 +15,7 @@ public class UserLoginController {
 
     private final UserService userService;
 
+
     public UserLoginController(UserService userService) {
         this.userService = userService;
     }
@@ -25,7 +27,10 @@ public class UserLoginController {
 
     @PostMapping
     public String loginUserAccount(@ModelAttribute("user") UserDto userDto) {
-        userService.loadUserByUsername(userDto.getUserName());
-        return "redirect:/";
+        if (userService.loginUser(userDto.getUserName(), userDto.getPassword())) {
+            return "redirect:/user/login?success";
+        } else {
+            return "redirect:/user/login?error";
+        }
     }
 }
