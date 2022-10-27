@@ -1,5 +1,5 @@
 nav {
-    background-color: lightgrey;
+    background: #1F2F98;
     text-align: center;
     width: 100%;
     position: sticky;
@@ -125,7 +125,7 @@ nav a {
 }
 
 input[type=button] {
-    background-color: darkgray;
+    background: #1F2F98;
     color: white;
     height: 50px;
     min-width: 100px;
@@ -134,7 +134,7 @@ input[type=button] {
 }
 
 input[type=button]:hover {
-    background-color: grey;
+    background-color: #2691d9;
 
 }
 
@@ -188,7 +188,7 @@ body {
 
 
 footer {
-    background: darkgray;
+    background: #1F2F98;
     position: fixed;
     bottom: 0px;
     width: 100%;
@@ -237,7 +237,7 @@ th {
     min-width: 50px;
     background-color: white;
     color: black;
-    border-radius: 12px;
+    border-radius: 10px;
 }
 
 td  {
