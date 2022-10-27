@@ -9,15 +9,34 @@
 <body>
 <div th:insert="fragments/navbar :: navbar"></div>
 
-<form th:action="@{/create-user}" method="post" th:object="${user}">
 
-    <!--<label>E-mail address: <input type="text" name="email"><br><br></label> -->
+<div class="sign-up-or-in">
+    <h1>Sign-Up</h1>
+    <form th:action="@{/create-user}" method="post" th:object="${user}">
 
-    <label>Username: <input id="usernameInput" th:field="*{userName}" type="text" name="username"><br><br></label>
-    <label>Password: <input th:field="*{password}" type="password" id="password" name="password"><br><br></label>
-    <input type="submit" value="Register">
+        <!--<label>E-mail address: <input type="text" name="email"><br><br></label> -->
 
-</form>
+        <div class="text-field">
+            <input th:field="*{userName}" type="text" required>
+            <span></span>
+            <label>Username</label>
+        </div>
+        <div class="text-field">
+            <input th:field="*{password}" type="password" required>
+            <span></span>
+            <label>Password</label>
+        </div>
+
+        <div class="text-field">
+            <input type="password" id="confirm_pass" required>
+            <span></span>
+            <label>Confirm Password</label>
+        </div>
+
+        <input type="submit" value="Register">
+
+    </form>
+</div>
 
 <div th:insert="fragments/footer :: footer"></div>
 
