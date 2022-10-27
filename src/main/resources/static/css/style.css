@@ -180,7 +180,10 @@ body {
     flex: 50%;
     margin-right: 120px;
     margin-left: 30px;
+    margin-bottom: 105px;
     text-align: justify;
+    background-color: white;
+    border-radius: 12px;
 }
 
 
@@ -232,13 +235,14 @@ th {
     position: sticky;
     top: 0; /* Skal til for at sticky virker */
     min-width: 50px;
-    background-color: grey;
-    color: lightgrey;
+    background-color: white;
+    color: black;
+    border-radius: 12px;
 }
 
 td  {
     border: 1px solid black;
     border-collapse: collapse;
     text-align: center;
-    background-color: lightgrey;
+    background-color: white;
 }
