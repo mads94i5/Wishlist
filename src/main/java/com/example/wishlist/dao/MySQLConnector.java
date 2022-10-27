@@ -1,6 +1,8 @@
 package com.example.wishlist.dao;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.datasource.DataSourceUtils;
+
 import java.sql.*;
 
 public class MySQLConnector {
@@ -13,7 +15,7 @@ public class MySQLConnector {
     public Connection getConnection() {
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection(url, user, pass);
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishingwell", "root", "root");
         } catch (SQLException e) {
             System.out.println("Cannot connect to database.");
             e.printStackTrace();
