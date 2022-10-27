@@ -1,21 +1,20 @@
 package com.example.wishlist.dao;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import java.sql.*;
 
 public class MySQLConnector {
-    @Value("${spring.datasource.url}")
-    private String url;
-    @Value("${spring.datasource.username}")
-    private String user;
-    @Value("${spring.datasource.password}")
-    private String pass;
+    // @Value("${spring.datasource.url}")
+    private String url = System.getenv("spring.datasource.url");
+    // @Value("${spring.datasource.username}")
+    private String user = System.getenv("spring.datasource.username");
+    // @Value("${spring.datasource.password}")
+    private String pass = System.getenv("spring.datasource.password");
     public Connection getConnection() {
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wishingwell", "root", "root");
+            conn = DriverManager.getConnection(url, user, pass);
         } catch (SQLException e) {
             System.out.println("Cannot connect to database.");
             e.printStackTrace();

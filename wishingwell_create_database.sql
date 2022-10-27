@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS users
 (
   id        			BIGINT          PRIMARY KEY 	NOT NULL 	AUTO_INCREMENT,
   user_name   			VARCHAR(50)     UNIQUE,
-  user_password			VARCHAR(50),
+  user_password			VARCHAR(100),
   wishlist_id			BIGINT,
   CONSTRAINT wishlist_user
     FOREIGN KEY (wishlist_id) REFERENCES wishlists(id)

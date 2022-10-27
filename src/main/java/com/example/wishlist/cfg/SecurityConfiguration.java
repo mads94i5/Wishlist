@@ -1,30 +1,33 @@
 package com.example.wishlist.cfg;
 
-import com.example.wishlist.srvs.UserService;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+/*
+import com.example.wishlist.srvs.UserService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
-
 @Configuration
 @EnableWebSecurity
+*/
 public class SecurityConfiguration {
 
-    private final UserService userService;
-
-    public SecurityConfiguration(UserService userService) {
-        this.userService = userService;
-    }
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+    /*
+    private final UserDetailsService userService;
+
+    public SecurityConfiguration(UserDetailsService userService) {
+        this.userService = userService;
     }
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -57,4 +60,10 @@ public class SecurityConfiguration {
     public SpringSecurityDialect springSecurityDialect() {
         return new SpringSecurityDialect();
     }
+ */
 }
+
+
+
+
+
