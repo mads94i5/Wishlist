@@ -1,20 +1,15 @@
 package com.example.wishlist.dao;
 
-import com.example.wishlist.ents.Role;
 import com.example.wishlist.ents.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Repository
 public class UserRepository {
-
-    @Value("${spring.datasource.url}")
-    private String db_url;
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
         try {
@@ -28,7 +23,6 @@ public class UserRepository {
                 String userName = resultSet.getString(2);
                 String password = resultSet.getString(3);
                 int wishlistId = resultSet.getInt(4);
-                Collection<Role> roles = (Collection<Role>) new Role(resultSet.getString(5));
                 users.add(new User(id, userName, password, wishlistId));
             }
         } catch (SQLException e) {
@@ -40,8 +34,8 @@ public class UserRepository {
     public User findByUserName(String searchUserName) {
         User user = new User();
         try {
-            // Connection conn = new MySQLConnector().getConnection();
-            Connection conn = DriverManager.getConnection(db_url, "root", "test");
+            Connection conn = new MySQLConnector().getConnection();
+            // Connection conn = DriverManager.getConnection(db_url, "root", "test");
 
             PreparedStatement psts = conn.prepareStatement("SELECT * FROM users WHERE user_name=?");
 
@@ -54,7 +48,6 @@ public class UserRepository {
                 String userName = resultSet.getString(2);
                 String password = resultSet.getString(3);
                 int wishlistId = resultSet.getInt(4);
-                Collection<Role> roles = (Collection<Role>) new Role(resultSet.getString(5));
                 user = new User(id, userName, password, wishlistId);
             }
         } catch (SQLException e) {
@@ -65,8 +58,8 @@ public class UserRepository {
     }
     public User create(User newUser) {
         try {
-            // Connection conn = new MySQLConnector().getConnection();
-            Connection conn = DriverManager.getConnection(db_url, "root", "test");
+            Connection conn = new MySQLConnector().getConnection();
+            // Connection conn = DriverManager.getConnection(db_url, "root", "test");
 
             String query = "INSERT INTO users (user_name, user_password) VALUES (?, ?)";
             PreparedStatement psts = conn.prepareStatement(query);
@@ -86,13 +79,12 @@ public class UserRepository {
             Connection conn = new MySQLConnector().getConnection();
 
             String query = "UPDATE users " +
-                    "SET user_name=?, user_password=?, wishlist_id=? WHERE id=?";
+                    "SET user_name=?, user_password=? WHERE id=?";
             PreparedStatement psts = conn.prepareStatement(query);
 
             psts.setString(1, user.getUserName());
             psts.setString(2, user.getPassword());
-            psts.setInt(3, user.getWishlistId());
-            psts.setLong(4, user.getId());
+            psts.setLong(3, user.getId());
 
             psts.executeUpdate();
         } catch (SQLException e) {

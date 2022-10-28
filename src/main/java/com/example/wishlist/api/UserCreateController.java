@@ -1,6 +1,6 @@
 package com.example.wishlist.api;
 
-import com.example.wishlist.dao.UserDto;
+import com.example.wishlist.ents.User;
 import com.example.wishlist.srvs.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,13 +20,13 @@ public class UserCreateController {
   }
   @GetMapping
   public String showCreateUser(Model model) {
-    model.addAttribute("user", new UserDto());
+    model.addAttribute("user", new User());
     return "user/create-user";
   }
 
   @PostMapping
-  public String registerUserAccount(@ModelAttribute("user") UserDto userDto) {
-    userService.create(userDto);
+  public String registerUserAccount(@ModelAttribute("user") User user) {
+    userService.create(user);
     return "redirect:/create-user?success";
   }
 
