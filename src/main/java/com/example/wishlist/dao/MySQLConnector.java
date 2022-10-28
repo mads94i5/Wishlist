@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import java.sql.*;
 
 public class MySQLConnector {
+    // @Value does not work as intended on classes without Bean annotation like @Repository
     // @Value("${spring.datasource.url}")
     private String url = System.getenv("spring.datasource.url");
     // @Value("${spring.datasource.username}")
