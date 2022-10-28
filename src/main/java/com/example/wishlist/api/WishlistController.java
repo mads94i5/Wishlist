@@ -22,7 +22,7 @@ public class WishlistController {
 
   @GetMapping("/wishlist/{id}")
   public String showWishlist(@PathVariable("id") Long id, Model model) {
-    model.addAttribute("wishlist", wishlistRepository.showWishList(id));
+    model.addAttribute("wishlist", wishlistRepository.findById(id));
     return "wishlist/wishlist";
   }
 

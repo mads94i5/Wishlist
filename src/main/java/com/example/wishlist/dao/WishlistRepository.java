@@ -38,17 +38,14 @@ public class WishlistRepository {
 
     public List<Wish> showWishList(Long id) {
 
-        //Wishlist foundWishlist = new Wishlist();
-        //foundWishlist.setId(id);
         List<Wish> wishlist = new LinkedList<>();
         try {
             Connection conn = new MySQLConnector().getConnection();
 
-            String query = "use wishingwell;\n" +
-                "select w.id, w.item_description, w.price, w.url, w.item_comment, w.reserved\n" +
-                "from users u\n" +
-                "left join wishes w\n" +
-                "on u.wishlist_id = w.wishlist_id id=?";
+            String query = "select * from wishes\n" +
+                "left join users u\n" +
+                "on u.wishlist_id = w.wishlist_id\n" +
+                "where u.wishlist_id = ?;";
             PreparedStatement psts = conn.prepareStatement(query);
 
             psts.setLong(1, id);
@@ -71,5 +68,28 @@ public class WishlistRepository {
             e.printStackTrace();
         }
         return wishlist;
+    }
+
+    public void addWish(Wish wish, Long id){
+
+        try {
+            Connection conn = new MySQLConnector().getConnection();
+
+            String query = "insert into wishes(description, price, url, item_comment, wishlist_id)\n" +
+                "values(?, ?, ?, ?, ?, ?)";
+            PreparedStatement psts = conn.prepareStatement(query);
+
+            psts.setString(1, wish.getDescription());
+            psts.setDouble(2, wish.getPrice());
+            psts.setURL(3, wish.getItemLink());
+            psts.setString(4, wish.getComment());
+            psts.setLong(5, id);
+
+            psts.executeQuery();
+
+        } catch (SQLException e) {
+            System.out.println("Cannot connect to database.");
+            e.printStackTrace();
+        }
     }
 }
