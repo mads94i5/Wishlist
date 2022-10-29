@@ -42,10 +42,10 @@ public class WishlistRepository {
         try {
             Connection conn = new MySQLConnector().getConnection();
 
-            String query = "select * from wishes\n" +
-                "left join users u\n" +
-                "on u.wishlist_id = w.wishlist_id\n" +
-                "where u.wishlist_id = ?;";
+            String query = "select * from wishes w " +
+                "left join users u " +
+                "on u.wishlist_id = w.wishlist_id " +
+                "where u.wishlist_id = ?";
             PreparedStatement psts = conn.prepareStatement(query);
 
             psts.setLong(1, id);
@@ -75,7 +75,7 @@ public class WishlistRepository {
         try {
             Connection conn = new MySQLConnector().getConnection();
 
-            String query = "insert into wishes(description, price, url, item_comment, wishlist_id)\n" +
+            String query = "insert into wishes (item_description, price, url, item_comment, wishlist_id) " +
                 "values(?, ?, ?, ?, ?, ?)";
             PreparedStatement psts = conn.prepareStatement(query);
 

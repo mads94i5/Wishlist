@@ -23,10 +23,12 @@ public class WishlistController {
   @GetMapping("/wishlist/{id}")
   public String showWishlist(@PathVariable("id") Long id, Model model) {
     model.addAttribute("wishlist", wishlistRepository.findById(id));
+    model.addAttribute("wishlist-id", id);
+
     return "wishlist/wishlist";
   }
 
-@GetMapping("/create-wishlist")
+  @GetMapping("/create-wishlist")
   public String createWishList() {
     return "wishlist/create-wishlist";
   }

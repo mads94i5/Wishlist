@@ -13,41 +13,42 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/login")
-public class UserLoginController {
+public class LoginController {
 
     private final UserService userService;
 
-
-    public UserLoginController(UserService userService) {
+    public LoginController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/login")
     public String showLogin(Model model, HttpSession session) {
         @SuppressWarnings("unchecked")
-        User loggedInUser = (User) session.getAttribute("logged-in");
-        if (loggedInUser == null) {
-            loggedInUser = new User();
-        }
-        model.addAttribute("logged-in", loggedInUser);
+        Long loginId = (Long) session.getAttribute("LOGIN_ID");
+        model.addAttribute("LOGIN_ID", loginId);
         model.addAttribute("user", new User());
         return "user/login";
     }
 
-    @PostMapping
-    public String loginUserAccount(@ModelAttribute("user") User user, HttpSession session, HttpServletRequest request) {
+    @PostMapping("/login")
+    public String loginUserAccount(@ModelAttribute("user") User user, HttpServletRequest request) {
         @SuppressWarnings("unchecked")
-        User loggedInUser = (User) request.getSession().getAttribute("logged-in");
-        if (loggedInUser == null) {
+        Long loginId = (Long) request.getSession().getAttribute("LOGIN_ID");
+        if (loginId == null) {
             if (userService.loginUser(user.getUserName(), user.getPassword())) {
-                request.getSession().setAttribute("logged-in", user);
+                request.getSession().setAttribute("LOGIN_ID", userService.findIdByUser(user));
                 return "redirect:/login?success";
             } else {
                 return "redirect:/login?error";
             }
         } else {
-            return "redirect:/login?logged-in";
+            return "redirect:/login?loggedin";
         }
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return "redirect:/";
     }
 }

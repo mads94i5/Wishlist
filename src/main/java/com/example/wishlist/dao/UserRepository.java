@@ -1,7 +1,6 @@
 package com.example.wishlist.dao;
 
 import com.example.wishlist.ents.User;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -31,7 +30,75 @@ public class UserRepository {
         }
         return users;
     }
-    public User findByUserName(String searchUserName) {
+
+    public Long findIdByUser(User user) {
+        Long userId = null;
+        try {
+            Connection conn = new MySQLConnector().getConnection();
+            // Connection conn = DriverManager.getConnection(db_url, "root", "test");
+
+            PreparedStatement psts = conn.prepareStatement("SELECT * FROM users WHERE user_name=?");
+
+            psts.setString(1, user.getUserName());
+
+            ResultSet resultSet = psts.executeQuery();
+
+            while (resultSet.next()) {
+                userId = resultSet.getLong(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Cannot connect to database.");
+            e.printStackTrace();
+        }
+        return userId;
+    }
+    public User findUserById(String userId) {
+        User user = new User();
+        try {
+            Connection conn = new MySQLConnector().getConnection();
+            // Connection conn = DriverManager.getConnection(db_url, "root", "test");
+
+            PreparedStatement psts = conn.prepareStatement("SELECT * FROM users WHERE id=?");
+
+            psts.setString(1, userId);
+
+            ResultSet resultSet = psts.executeQuery();
+
+            while (resultSet.next()) {
+                Long id = resultSet.getLong(1);
+                String userName = resultSet.getString(2);
+                String password = resultSet.getString(3);
+                int wishlistId = resultSet.getInt(4);
+                user = new User(id, userName, password, wishlistId);
+            }
+        } catch (SQLException e) {
+            System.out.println("Cannot connect to database.");
+            e.printStackTrace();
+        }
+        return user;
+    }
+    public String findUserNameById(String userId) {
+        String userName = "";
+        try {
+            Connection conn = new MySQLConnector().getConnection();
+            // Connection conn = DriverManager.getConnection(db_url, "root", "test");
+
+            PreparedStatement psts = conn.prepareStatement("SELECT * FROM users WHERE id=?");
+
+            psts.setString(1, userId);
+
+            ResultSet resultSet = psts.executeQuery();
+
+            while (resultSet.next()) {
+                userName = resultSet.getString(2);
+            }
+        } catch (SQLException e) {
+            System.out.println("Cannot connect to database.");
+            e.printStackTrace();
+        }
+        return userName;
+    }
+    public User findUserByUserName(String searchUserName) {
         User user = new User();
         try {
             Connection conn = new MySQLConnector().getConnection();

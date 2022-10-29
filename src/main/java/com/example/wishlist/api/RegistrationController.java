@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/create-user")
-public class UserCreateController {
+public class RegistrationController {
 
   private final UserService userService;
 
-  public UserCreateController(UserService userService) {
+  public RegistrationController(UserService userService) {
     this.userService = userService;
   }
   @GetMapping
@@ -29,7 +29,4 @@ public class UserCreateController {
     userService.create(user);
     return "redirect:/create-user?success";
   }
-
-
-
 }

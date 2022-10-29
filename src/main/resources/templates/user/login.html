@@ -20,6 +20,9 @@
     <div class="valid_login" th:if="${param.success}">
         Successfully logged in
     </div>
+    <div class="invalid_login" th:if="${param.loggedin}">
+        Already logged in
+    </div>
     <form th:action="@{/login}" method="post" th:object="${user}">
         <div class="text-field">
             <input th:field="*{userName}" type="text" required>
