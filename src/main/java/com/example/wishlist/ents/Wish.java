@@ -11,6 +11,15 @@ public class Wish {
   private boolean reserved;
   private Long wishListId;
 
+  public Wish(String description, double price, URL itemLink, String comment, boolean reserved, Long wishListId) {
+    this.description = description;
+    this.price = price;
+    this.itemLink = itemLink;
+    this.comment = comment;
+    this.reserved = reserved;
+    this.wishListId = wishListId;
+  }
+
   public Wish(Long id, String description, double price, URL itemLink, String comment, boolean reserved, Long wishListId) {
     this.id = id;
     this.description = description;

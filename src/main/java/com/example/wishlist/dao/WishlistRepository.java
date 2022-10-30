@@ -42,7 +42,7 @@ public class WishlistRepository {
         try {
             Connection conn = new MySQLConnector().getConnection();
 
-            String query = "select * from wishes\n" +
+            String query = "select * from wishes w\n" +
                 "left join users u\n" +
                 "on u.wishlist_id = w.wishlist_id\n" +
                 "where u.wishlist_id = ?;";
@@ -53,14 +53,13 @@ public class WishlistRepository {
             ResultSet rs = psts.executeQuery();
 
             while (rs.next()){
-                Long wId = rs.getLong(1);
-                String description = rs.getString(2);
-                double price = rs.getDouble(3);
-                URL url = rs.getURL(4);
-                String comment = rs.getString(5);
-                boolean reserved = rs.getBoolean(6);
+                String description = rs.getString(1);
+                double price = rs.getDouble(2);
+                URL url = rs.getURL(3);
+                String comment = rs.getString(4);
+                boolean reserved = rs.getBoolean(5);
 
-                wishlist.add(new Wish(wId, description, price, url, comment, reserved, id));
+                wishlist.add(new Wish(description, price, url, comment, reserved, id));
 
             }
         } catch (SQLException e) {
@@ -75,7 +74,7 @@ public class WishlistRepository {
         try {
             Connection conn = new MySQLConnector().getConnection();
 
-            String query = "insert into wishes(description, price, url, item_comment, wishlist_id)\n" +
+            String query = "insert into wishes(item_description, price, url, item_comment, wishlist_id)\n" +
                 "values(?, ?, ?, ?, ?, ?)";
             PreparedStatement psts = conn.prepareStatement(query);
 
