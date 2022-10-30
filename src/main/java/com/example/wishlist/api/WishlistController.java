@@ -22,12 +22,15 @@ public class WishlistController {
 
   //Nedenstående skal  metode slettes, kun tilføjet for at kunne se om tabel virkede.
   @GetMapping("/wishlist")
-  public String wishlist() {
+  public String wishlist(){
     return "wishlist/wishlist";
   }
 
   @GetMapping("/wishlist/{id}")
   public String showWishlist(@PathVariable("id") Long id, Model model) {
+    model.addAttribute("wishlist", wishlistRepository.findById(id));
+    model.addAttribute("wishlist-id", id);
+//Nedenstående overlapper måske den første addAttribute
     model.addAttribute("wishlist", wishlistRepository.showWishList(id));
     return "wishlist/wishlist";
   }
