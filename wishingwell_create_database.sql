@@ -1,9 +1,19 @@
 CREATE DATABASE IF NOT EXISTS wishingwell;
 USE wishingwell;
 
+CREATE TABLE IF NOT EXISTS users
+(
+    id        			BIGINT          PRIMARY KEY 	NOT NULL 	AUTO_INCREMENT,
+    user_name   			VARCHAR(50)     UNIQUE,
+    user_password			VARCHAR(100)
+);
+
 CREATE TABLE IF NOT EXISTS wishlists
 (
-  id        			BIGINT          PRIMARY KEY 	NOT NULL 	AUTO_INCREMENT
+  id        			BIGINT          PRIMARY KEY 	NOT NULL 	AUTO_INCREMENT,
+  user_id               BIGINT          NOT NULL,
+  CONSTRAINT wishlist_user
+  FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE IF NOT EXISTS wishes
@@ -16,15 +26,5 @@ CREATE TABLE IF NOT EXISTS wishes
   reserved				BIT(1),
   wishlist_id			BIGINT			NOT NULL,
   CONSTRAINT wishlist_wish
-    FOREIGN KEY (wishlist_id) REFERENCES wishlists(id)
-);
-
-CREATE TABLE IF NOT EXISTS users
-(
-  id        			BIGINT          PRIMARY KEY 	NOT NULL 	AUTO_INCREMENT,
-  user_name   			VARCHAR(50)     UNIQUE,
-  user_password			VARCHAR(100),
-  wishlist_id			BIGINT,
-  CONSTRAINT wishlist_user
     FOREIGN KEY (wishlist_id) REFERENCES wishlists(id)
 );

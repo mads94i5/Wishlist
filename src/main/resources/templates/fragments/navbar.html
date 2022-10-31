@@ -9,19 +9,19 @@
 <nav th:fragment="navbar">
     <img class="navbarimage" src="img/well.png" width="35px" height="35px">
     <a href="/"><input type="button" value="Home"></a>
-    <span>
+    <span th:if="${session.containsKey('LOGIN_ID')}">
         <a href="/create-user"><input type="button" value="Sign up"></a>
         <a href="/login"><input type="button" value="Login"></a>
     </span>
     <!-- Skift th:unless til th:if i den nederstående span for at få alle knapper frem på navbar'en. session.containsKey virker ikke som antaget -->
-    <span>
-        <span>
+    <span th:if="${session.containsKey('LOGIN_ID')}">
+        <span th:unless="${session.containsKey('WISHLIST_ID')}">
             <!--
             <a th:href="/wishlist/${session.WISHLIST_ID}"><input type="button" value="Show wishlist"></a>
             -->
             <a href="/wishlist"><input type="button" value="Show wishlist"></a>
         </span>
-        <span>
+        <span th:if="${session.containsKey('WISHLIST_ID')}">
             <a href="/create-wishlist"><input type="button" value="Create wishlist"></a>
         </span>
         <a href="/logout"><input type="button" value="Logout"></a>
