@@ -3,7 +3,7 @@ USE wishingwell;
 
 CREATE TABLE IF NOT EXISTS wishlists
 (
-  id        			BIGINT          PRIMARY KEY 	NOT NULL 	AUTO_INCREMENT
+  id        			BIGINT          PRIMARY KEY 	NOT NULL 	AUTO_INCREMENT,
   user_id               BIGINT          NOT NULL,
   CONSTRAINT wishlist_user
   FOREIGN KEY (user_id) REFERENCES users(id)
