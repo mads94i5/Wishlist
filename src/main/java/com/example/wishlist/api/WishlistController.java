@@ -31,7 +31,7 @@ public class WishlistController {
     model.addAttribute("wishlist", wishlistRepository.findById(id));
     model.addAttribute("wishlist-id", id);
 //Nedenstående overlapper måske den første addAttribute
-    model.addAttribute("wishlist", wishlistRepository.showWishList(id));
+    //model.addAttribute("wishlist", wishlistRepository.showWishList(id));
     return "wishlist/wishlist";
   }
 
