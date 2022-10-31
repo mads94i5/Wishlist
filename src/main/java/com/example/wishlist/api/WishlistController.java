@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.URL;
 
 @Controller
@@ -20,9 +21,11 @@ public class WishlistController {
     wishlistRepository = w;
   }
 
-  //Nedenstående skal  metode slettes, kun tilføjet for at kunne se om tabel virkede.
+
   @GetMapping("/wishlist")
-  public String wishlist(){
+  public String wishlist(Model model, HttpServletRequest request){
+    Long logInId = (Long) request.getSession().getAttribute("LOGIN_ID");
+    model.addAttribute("wishlist", wishlistRepository.showWishLists(logInId));
     return "wishlist/wishlist";
   }
 
@@ -31,7 +34,7 @@ public class WishlistController {
     model.addAttribute("wishlist", wishlistRepository.findById(id));
     model.addAttribute("wishlist-id", id);
 //Nedenstående overlapper måske den første addAttribute
-    //model.addAttribute("wishlist", wishlistRepository.showWishList(id));
+    //model.addAttribute("wishlist", wishlistRepository.showWishes(id));
     return "wishlist/wishlist";
   }
 
