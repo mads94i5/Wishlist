@@ -22,7 +22,7 @@ public class WishlistController {
   }
 
 
-  @GetMapping("/wishlist")
+  @GetMapping("/wishlists")
   public String wishlist(Model model, HttpServletRequest request){
     Long logInId = (Long) request.getSession().getAttribute("LOGIN_ID");
     model.addAttribute("wishlist", wishlistRepository.showWishLists(logInId));
