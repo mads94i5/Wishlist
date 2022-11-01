@@ -48,15 +48,14 @@ public class WishlistController {
     return "wishlist/create-wishlist";
   }
 
-  @PostMapping("/create-wishlist")
+  @PostMapping("/create-wish")
   public String addWish(@PathVariable("id") Long id,
-                              @RequestParam("Description") String description,
-                              @RequestParam("Price") double price,
-                              @RequestParam("URL") URL itemLink,
-                              @RequestParam("Comment") String comment,
-                              @RequestParam("Reserved") boolean reserved) {
+                              @RequestParam("item_description") String description,
+                              @RequestParam("item_price") double price,
+                              @RequestParam("item_url") URL itemLink,
+                              @RequestParam("item_comment") String comment){
 
-    Wish newWish = new Wish(description, price, itemLink, comment, reserved, id);
+    Wish newWish = new Wish(description, price, itemLink, comment, false, id);
 
     wishlistRepository.addWish(newWish, id);
 
