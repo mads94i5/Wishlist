@@ -37,10 +37,9 @@ public class WishlistController {
 
   @GetMapping("/wishlist/{id}")
   public String showWishlist(@PathVariable("id") Long id, Model model) {
-    model.addAttribute("wishlist", wishlistRepository.findById(id));
-    model.addAttribute("wishlist-id", id);
-    //Nedenstående overlapper måske den første addAttribute
-    //model.addAttribute("wishlist", wishlistRepository.showWishes(id));
+
+    model.addAttribute("wishlist", wishlistRepository.showWishes(id));
+
     return "wishlist/wishlist";
   }
 
@@ -60,6 +59,14 @@ public class WishlistController {
     Wish newWish = new Wish(description, price, itemLink, comment, reserved, id);
 
     wishlistRepository.addWish(newWish, id);
+
+    return "redirect:/wishlist/{id}";
+  }
+
+  @PostMapping("/wishlist/{id}")
+  public String reserveWish(@PathVariable Long id, @RequestParam("reserved") boolean reserved, @RequestParam("id") Long wishId){
+
+    wishlistRepository.reserveWish(wishId, reserved);
 
     return "redirect:/wishlist/{id}";
   }

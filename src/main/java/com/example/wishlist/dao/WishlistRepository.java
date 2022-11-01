@@ -122,4 +122,25 @@ public class WishlistRepository {
             e.printStackTrace();
         }
     }
+
+    public void reserveWish(Long wishId, boolean reserved){
+
+        try {
+            Connection conn = new MySQLConnector().getConnection();
+
+            String query = "update wishes (reserved) " +
+                "values(?) " +
+                "where id = ?";
+            PreparedStatement psts = conn.prepareStatement(query);
+
+            psts.setBoolean(1, reserved);
+            psts.setLong(2, wishId);
+
+            psts.executeQuery();
+
+        } catch (SQLException e) {
+            System.out.println("Cannot connect to database.");
+            e.printStackTrace();
+        }
+    }
 }
