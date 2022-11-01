@@ -11,29 +11,27 @@ import java.util.List;
 
 @Repository
 public class WishlistRepository {
-    public Wishlist findById(Long id) {
-        Wishlist foundWishlist = new Wishlist();
-        foundWishlist.setId(id);
+    public Long findByUserId(Long userId) {
+
+        Long foundId = null;
         try {
             Connection conn = new MySQLConnector().getConnection();
 
-            String query = "SELECT * FROM wishlists WHERE id=?";
+            String query = "SELECT * FROM wishlists WHERE user_id=?";
             PreparedStatement psts = conn.prepareStatement(query);
 
-            psts.setLong(1, id);
+            psts.setLong(1, userId);
 
             ResultSet rs = psts.executeQuery();
 
             rs.next();
-            Long foundId = rs.getLong(1);
-
-            foundWishlist.setId(foundId);
+            foundId = rs.getLong(1);
 
         } catch (SQLException e) {
             System.out.println("Cannot connect to database.");
             e.printStackTrace();
         }
-        return foundWishlist;
+        return foundId;
     }
 
     public List<Wishlist> showWishLists(Long id) {
@@ -143,4 +141,51 @@ public class WishlistRepository {
             e.printStackTrace();
         }
     }
+
+    public void createWishlist(Long userId){
+
+        try {
+            Connection conn = new MySQLConnector().getConnection();
+
+            String query = "insert into wishlists (user_id) " +
+                "values(?);";
+            PreparedStatement psts = conn.prepareStatement(query);
+
+            psts.setLong(1, userId);
+
+            psts.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Cannot connect to database.");
+            e.printStackTrace();
+        }
+    }
+
+    public Long findNewWishList(Long userId) {
+
+        Long foundId = null;
+        try {
+            Connection conn = new MySQLConnector().getConnection();
+
+            String query = "select id " +
+                "from wishlists " +
+                "where user_id = ? " +
+                "order by id desc " +
+                "LIMIT 1;";
+            PreparedStatement psts = conn.prepareStatement(query);
+
+            psts.setLong(1, userId);
+
+            ResultSet rs = psts.executeQuery();
+
+            rs.next();
+            foundId = rs.getLong(1);
+
+        } catch (SQLException e) {
+            System.out.println("Cannot connect to database.");
+            e.printStackTrace();
+        }
+        return foundId;
+    }
+
 }

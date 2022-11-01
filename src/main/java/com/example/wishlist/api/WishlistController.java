@@ -44,18 +44,28 @@ public class WishlistController {
   }
 
   @GetMapping("/create-wishlist")
-  public String createWishList() {
-    return "wishlist/create-wishlist";
+  public String createWishList(HttpSession session) {
+    Long logInId = (Long) session.getAttribute("LOGIN_ID");
+    wishlistRepository.createWishlist(logInId);
+    Long wishlistId = wishlistRepository.findNewWishList(logInId);
+    return "redirect:/create-wish/" + wishlistId;
   }
 
-  @PostMapping("/create-wish")
-  public String addWish(@PathVariable("id") Long id,
+  @GetMapping("/create-wish/{id}")
+  public String createWish(@PathVariable("id") Long id) {
+
+    return "wishlist/create-wish";
+  }
+
+  @PostMapping("/create-wish/{id}")
+  public String addWish(Model model, @PathVariable("id") Long id,
                               @RequestParam("item_description") String description,
                               @RequestParam("item_price") double price,
                               @RequestParam("item_url") URL itemLink,
                               @RequestParam("item_comment") String comment){
 
     Wish newWish = new Wish(description, price, itemLink, comment, false, id);
+    model.addAttribute("wish", newWish);
 
     wishlistRepository.addWish(newWish, id);
 
