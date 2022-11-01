@@ -25,10 +25,7 @@ public class LoginController {
     public String showLogin(Model model, HttpSession session) {
         @SuppressWarnings("unchecked")
         Long loginId = (Long) session.getAttribute("LOGIN_ID");
-        if (loginId == null) {
-            loginId = -1L;
-            session.setAttribute("LOGIN_ID", loginId);
-        }
+
         model.addAttribute("LOGIN_ID", loginId);
         model.addAttribute("user", new User());
         return "user/login";

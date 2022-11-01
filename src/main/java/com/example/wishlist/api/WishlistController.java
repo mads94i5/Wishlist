@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.net.URL;
+import java.net.http.HttpRequest;
 
 @Controller
 public class WishlistController {
@@ -23,17 +25,21 @@ public class WishlistController {
 
 
   @GetMapping("/wishlists")
-  public String wishlist(Model model, HttpServletRequest request){
-    Long logInId = (Long) request.getSession().getAttribute("LOGIN_ID");
-    model.addAttribute("wishlist", wishlistRepository.showWishLists(logInId));
-    return "wishlist/wishlist";
+  public String wishlist(Model model, HttpSession session){
+    Long loginId = (Long) session.getAttribute("LOGIN_ID");
+
+    model.addAttribute("LOGIN_ID", loginId);
+
+    model.addAttribute("wishlists", wishlistRepository.showWishLists(loginId));
+
+    return "wishlist/wishlists";
   }
 
   @GetMapping("/wishlist/{id}")
   public String showWishlist(@PathVariable("id") Long id, Model model) {
     model.addAttribute("wishlist", wishlistRepository.findById(id));
     model.addAttribute("wishlist-id", id);
-//Nedenstående overlapper måske den første addAttribute
+    //Nedenstående overlapper måske den første addAttribute
     //model.addAttribute("wishlist", wishlistRepository.showWishes(id));
     return "wishlist/wishlist";
   }
