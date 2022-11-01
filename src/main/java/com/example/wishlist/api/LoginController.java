@@ -35,19 +35,14 @@ public class LoginController {
     public String loginUserAccount(@ModelAttribute("user") User user, HttpServletRequest request) {
         @SuppressWarnings("unchecked")
         Long loginId = (Long) request.getSession().getAttribute("LOGIN_ID");
-        System.out.println("Attempting login with Login ID: " + loginId);
         if (loginId == null) {
-            System.out.println("Login does not already exist in session db table. Attempt to login user.");
             if (userService.loginUser(user.getUserName(), user.getPassword())) {
                 request.getSession().setAttribute("LOGIN_ID", userService.findIdByUser(user));
-                System.out.println("User logged in successfully with Login ID: " + loginId);
                 return "redirect:/login?success";
             } else {
-                System.out.println("User failed to log in with Login ID: " + loginId);
                 return "redirect:/login?error";
             }
         } else {
-            System.out.println("User already logged in with Login ID: " + loginId);
             return "redirect:/login?loggedin";
         }
     }
