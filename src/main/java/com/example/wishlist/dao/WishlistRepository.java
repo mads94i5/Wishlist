@@ -36,16 +36,16 @@ public class WishlistRepository {
         return foundWishlist;
     }
 
-    public List<Wish> showWishList(Long id) {
+    public List<Wishlist> showWishLists(Long id) {
 
-        List<Wish> wishlist = new LinkedList<>();
+        List<Wishlist> wishlists = new LinkedList<>();
         try {
             Connection conn = new MySQLConnector().getConnection();
 
-            String query = "select * from wishes w " +
+            String query = "select * from wishlists w " +
                 "left join users u " +
-                "on u.wishlist_id = w.wishlist_id " +
-                "where u.wishlist_id = ?";
+                "on u.id = w.user_id " +
+                "where u.id = ?";
             PreparedStatement psts = conn.prepareStatement(query);
 
             psts.setLong(1, id);
@@ -54,13 +54,43 @@ public class WishlistRepository {
 
             while (rs.next()){
                 Long wId = rs.getLong(1);
-                String description = rs.getString(2);
-                double price = rs.getDouble(3);
-                URL url = rs.getURL(4);
-                String comment = rs.getString(5);
-                boolean reserved = rs.getBoolean(6);
+                Long userId = rs.getLong(2);
 
-                wishlist.add(new Wish(wId, description, price, url, comment, reserved, id));
+
+                wishlists.add(new Wishlist(wId, userId));
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Cannot connect to database.");
+            e.printStackTrace();
+        }
+        return wishlists;
+    }
+
+    public List<Wish> showWishes(Long wishListId) {
+
+        List<Wish> wishlist = new LinkedList<>();
+        try {
+            Connection conn = new MySQLConnector().getConnection();
+
+            String query = "select * from wishes w " +
+                "left join wishlist wl " +
+                "on wl.id = w.wishlist_id " +
+                "where wl.id = ?";
+            PreparedStatement psts = conn.prepareStatement(query);
+
+            psts.setLong(1, wishListId);
+
+            ResultSet rs = psts.executeQuery();
+
+            while (rs.next()){
+                String description = rs.getString(1);
+                double price = rs.getDouble(2);
+                URL url = rs.getURL(3);
+                String comment = rs.getString(4);
+                boolean reserved = rs.getBoolean(5);
+
+                wishlist.add(new Wish(description, price, url, comment, reserved, wishListId));
 
             }
         } catch (SQLException e) {

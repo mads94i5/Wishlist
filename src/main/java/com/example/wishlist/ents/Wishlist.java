@@ -2,6 +2,20 @@ package com.example.wishlist.ents;
 
 public class Wishlist {
     private Long id;
+    private Long userId;
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Wishlist(Long id, Long userId) {
+        this.id = id;
+        this.userId = userId;
+    }
 
     public Wishlist() {
     }
