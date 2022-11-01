@@ -1,3 +1,5 @@
+
+DROP DATABASE IF EXISTS wishingwell;
 CREATE DATABASE IF NOT EXISTS wishingwell;
 USE wishingwell;
 

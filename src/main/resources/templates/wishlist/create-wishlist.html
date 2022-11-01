@@ -8,6 +8,31 @@
 </head>
 <body>
 <div th:insert="fragments/navbar :: navbar"></div>
+
+
+<form th:action="@{/create-wishlist}" method="post" th:object="${wishes}">
+    <div class="item-description-input">
+        <input th:field="*{item_description}" id="item_description" required>
+        <label>Item</label>
+    </div>
+
+    <div class="item-price-input">
+        <input th:field="*{price}" id="item-price">
+        <label>Price</label>
+        </div>
+
+    <div class="item-comment-input">
+        <input th:field="*{item_comment}" id="item_comment">
+        <label>Comment</label>
+    </div>
+
+    <div class="item-url-input">
+        <input th:field="*{url}" id="item_url">
+        <label>Link</label>
+    </div>
+
+</form>
+
 <div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>
