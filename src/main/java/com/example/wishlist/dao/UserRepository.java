@@ -21,8 +21,7 @@ public class UserRepository {
                 Long id = resultSet.getLong(1);
                 String userName = resultSet.getString(2);
                 String password = resultSet.getString(3);
-                int wishlistId = resultSet.getInt(4);
-                users.add(new User(id, userName, password, wishlistId));
+                users.add(new User(id, userName, password));
             }
         } catch (SQLException e) {
             System.out.println("Cannot connect to database.");
@@ -68,8 +67,7 @@ public class UserRepository {
                 Long id = resultSet.getLong(1);
                 String userName = resultSet.getString(2);
                 String password = resultSet.getString(3);
-                int wishlistId = resultSet.getInt(4);
-                user = new User(id, userName, password, wishlistId);
+                user = new User(id, userName, password);
             }
         } catch (SQLException e) {
             System.out.println("Cannot connect to database.");
@@ -114,8 +112,7 @@ public class UserRepository {
                 Long id = resultSet.getLong(1);
                 String userName = resultSet.getString(2);
                 String password = resultSet.getString(3);
-                int wishlistId = resultSet.getInt(4);
-                user = new User(id, userName, password, wishlistId);
+                user = new User(id, userName, password);
             }
         } catch (SQLException e) {
             System.out.println("Cannot connect to database.");
