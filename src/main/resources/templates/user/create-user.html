@@ -22,18 +22,30 @@
             <label>Username</label>
         </div>
         <div class="text-field">
-            <input th:field="*{password}" type="password" required>
+            <input th:field="*{password}" type="password" id="password" required onchange="checkPasswordConfirmation()">
             <span></span>
             <label>Password</label>
         </div>
 
         <div class="text-field">
-            <input type="password" id="confirm_pass" required>
+            <input type="password" id="confirm_pass" required onchange="checkPasswordConfirmation()">
             <span></span>
             <label>Confirm Password</label>
         </div>
 
-        <input type="submit" value="Register">
+        <input type="submit" value="Register" id="submit">
+
+        <script>
+            function checkPasswordConfirmation() {
+                const password = document.getElementById('password')
+                const confirmedPassword = document.getElementById('confirm_pass')
+                const submit = document.getElementById('submit')
+
+                if (password === confirmedPassword){
+                    submit.disabled = false;
+                }
+            }
+        </script>
 
     </form>
 </div>
