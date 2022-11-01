@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.net.URL;
+import java.net.http.HttpRequest;
 
 @Controller
 public class WishlistController {
@@ -23,37 +25,57 @@ public class WishlistController {
 
 
   @GetMapping("/wishlists")
-  public String wishlist(Model model, HttpServletRequest request){
-    Long logInId = (Long) request.getSession().getAttribute("LOGIN_ID");
-    model.addAttribute("wishlist", wishlistRepository.showWishLists(logInId));
-    return "wishlist/wishlist";
+  public String wishlist(Model model, HttpSession session){
+    Long loginId = (Long) session.getAttribute("LOGIN_ID");
+
+    model.addAttribute("LOGIN_ID", loginId);
+
+    model.addAttribute("wishlists", wishlistRepository.showWishLists(loginId));
+
+    return "wishlist/wishlists";
   }
 
   @GetMapping("/wishlist/{id}")
   public String showWishlist(@PathVariable("id") Long id, Model model) {
-    model.addAttribute("wishlist", wishlistRepository.findById(id));
-    model.addAttribute("wishlist-id", id);
-//Nedenstående overlapper måske den første addAttribute
-    //model.addAttribute("wishlist", wishlistRepository.showWishes(id));
+
+    model.addAttribute("wishlist", wishlistRepository.showWishes(id));
+
     return "wishlist/wishlist";
   }
 
   @GetMapping("/create-wishlist")
-  public String createWishList() {
-    return "wishlist/create-wishlist";
+  public String createWishList(HttpSession session) {
+    Long logInId = (Long) session.getAttribute("LOGIN_ID");
+    wishlistRepository.createWishlist(logInId);
+    Long wishlistId = wishlistRepository.findNewWishList(logInId);
+    return "redirect:/create-wish/" + wishlistId;
   }
 
-  @PostMapping("/create-wishlist")
-  public String addWish(@PathVariable("id") Long id,
-                              @RequestParam("Description") String description,
-                              @RequestParam("Price") double price,
-                              @RequestParam("URL") URL itemLink,
-                              @RequestParam("Comment") String comment,
-                              @RequestParam("Reserved") boolean reserved) {
+  @GetMapping("/create-wish/{id}")
+  public String createWish(@PathVariable("id") Long id) {
 
-    Wish newWish = new Wish(description, price, itemLink, comment, reserved, id);
+    return "wishlist/create-wish";
+  }
+
+  @PostMapping("/create-wish/{id}")
+  public String addWish(Model model, @PathVariable("id") Long id,
+                              @RequestParam("item_description") String description,
+                              @RequestParam("item_price") double price,
+                              @RequestParam("item_url") URL itemLink,
+                              @RequestParam("item_comment") String comment){
+
+    Wish newWish = new Wish(description, price, itemLink, comment, false, id);
+    model.addAttribute("wish", newWish);
 
     wishlistRepository.addWish(newWish, id);
+
+    return "redirect:/wishlist/{id}";
+  }
+
+  @PostMapping("/wishlist/{id}")
+  public String reserveWish(@PathVariable Long id, @RequestParam("reserved") boolean reserved, @RequestParam("id") Long wishId){
+
+    wishlistRepository.reserveWish(wishId, reserved);
 
     return "redirect:/wishlist/{id}";
   }
