@@ -17,7 +17,7 @@ public class MySQLConnector {
         try {
             conn = DriverManager.getConnection(url, user, pass);
         } catch (SQLException e) {
-            System.out.println("Cannot connect to database.");
+            System.out.println("MySQLConnector: Cannot connect to database.");
             e.printStackTrace();
         }
         return conn;

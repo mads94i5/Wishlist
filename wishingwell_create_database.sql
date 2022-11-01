@@ -4,8 +4,8 @@ USE wishingwell;
 CREATE TABLE IF NOT EXISTS users
 (
     id        			BIGINT          PRIMARY KEY 	NOT NULL 	AUTO_INCREMENT,
-    user_name   			VARCHAR(50)     UNIQUE,
-    user_password			VARCHAR(100)
+    user_name   		VARCHAR(50)     UNIQUE,
+    user_password		VARCHAR(100)
 );
 
 CREATE TABLE IF NOT EXISTS wishlists

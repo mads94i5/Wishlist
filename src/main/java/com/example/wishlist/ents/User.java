@@ -6,7 +6,6 @@ public class User {
     private Long id;
     private String userName;
     private String password;
-    private int wishlistId;
 
     public User() {
     }
@@ -16,17 +15,10 @@ public class User {
         this.password = password;
     }
 
-    public User(String userName, String password, int wishlistId) {
-        this.userName = userName;
-        this.password = password;
-        this.wishlistId = wishlistId;
-    }
-
-    public User(Long id, String userName, String password, int wishlistId) {
+    public User(Long id, String userName, String password) {
         this.id = id;
         this.userName = userName;
         this.password = password;
-        this.wishlistId = wishlistId;
     }
 
     public Long getId() {
@@ -51,13 +43,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getWishlistId() {
-        return wishlistId;
-    }
-
-    public void setWishlistId(int wishlistId) {
-        this.wishlistId = wishlistId;
     }
 }
