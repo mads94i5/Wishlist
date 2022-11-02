@@ -27,10 +27,11 @@
         <td th:text="${i.reserved}"><form th:action="@{'/wishlist/' + ${i.wishListId}}" method="post"><input type="checkbox" th:field="*{i.reserved}" name="reserved"><input type="hidden" th:value="*{i.id}" name="id"></form></td>
     </tr>
 </table>
+    <a th:href="@{'/create-wish/' + ${id}}" style="margin-left: 290px; margin-right: auto">
+        <input style="max-width: 800px" type="submit" value="Create Wish">
+    </a>
 </div>
-<a th:href="@{'/create-wish/' + ${id}}" style="margin-left: 290px; margin-right: auto">
-    <input style="max-width: 800px" type="submit" value="Create Wish">
-</a>
+
 <div th:insert="fragments/footer :: footer"></div>
 </body>
 
