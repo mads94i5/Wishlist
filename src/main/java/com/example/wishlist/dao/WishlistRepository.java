@@ -72,7 +72,7 @@ public class WishlistRepository {
             Connection conn = new MySQLConnector().getConnection();
 
             String query = "select * from wishes w " +
-                "left join wishlist wl " +
+                "left join wishlists wl " +
                 "on wl.id = w.wishlist_id " +
                 "where wl.id = ?";
             PreparedStatement psts = conn.prepareStatement(query);
@@ -84,7 +84,7 @@ public class WishlistRepository {
             while (rs.next()){
                 String description = rs.getString(1);
                 double price = rs.getDouble(2);
-                URL url = rs.getURL(3);
+                String url = rs.getString(3);
                 String comment = rs.getString(4);
                 boolean reserved = rs.getBoolean(5);
 
@@ -103,17 +103,18 @@ public class WishlistRepository {
         try {
             Connection conn = new MySQLConnector().getConnection();
 
-            String query = "insert into wishes (item_description, price, url, item_comment, wishlist_id) " +
+            String query = "insert into wishes (item_description, price, url, item_comment, reserved, wishlist_id) " +
                 "values(?, ?, ?, ?, ?, ?)";
             PreparedStatement psts = conn.prepareStatement(query);
 
             psts.setString(1, wish.getDescription());
             psts.setDouble(2, wish.getPrice());
-            psts.setURL(3, wish.getItemLink());
+            psts.setString(3, wish.getItemLink());
             psts.setString(4, wish.getComment());
-            psts.setLong(5, id);
+            psts.setBoolean(5, wish.isReserved());
+            psts.setLong(6, id);
 
-            psts.executeQuery();
+            psts.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println("Cannot connect to database.");

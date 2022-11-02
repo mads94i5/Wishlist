@@ -10,21 +10,21 @@
 <div th:insert="fragments/navbar :: navbar"></div>
 
 
-<form th:action="@{/create-wish}" method="post">
+<form th:action="@{'/create-wish/' + ${id}}" method="post">
     <div class="item-description-input">
-        <label>Beskrivelse<input name="item_description" required></label>
+        <label>Beskrivelse<input type="text" name="item_description" required></label>
     </div>
 
     <div class="item-price-input">
-        <label>Pris<input name="item-price"></label>
+        <label>Pris<input type="number" name="item_price"></label>
     </div>
 
     <div class="item-comment-input">
-        <label>Kommentar<input name="item_comment"></label>
+        <label>Kommentar<input type="text" name="item_comment"></label>
     </div>
 
     <div class="item-url-input">
-        <label>Link<input name="item_url"></label>
+        <label>Link<input type="text" name="item_url"></label>
     </div>
 
     <input type="submit" value="Create Wish">

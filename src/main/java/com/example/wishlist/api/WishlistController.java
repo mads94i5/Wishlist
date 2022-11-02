@@ -61,7 +61,7 @@ public class WishlistController {
   public String addWish(Model model, @PathVariable("id") Long id,
                               @RequestParam("item_description") String description,
                               @RequestParam("item_price") double price,
-                              @RequestParam("item_url") URL itemLink,
+                              @RequestParam("item_url") String itemLink,
                               @RequestParam("item_comment") String comment){
 
     Wish newWish = new Wish(description, price, itemLink, comment, false, id);
