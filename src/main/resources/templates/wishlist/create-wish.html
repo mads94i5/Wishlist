@@ -11,7 +11,7 @@
 
 <div class="box-of-user-prompts">
     <h1>New Wish</h1>
-    <form th:action="@{/create-wish}" method="post">
+    <form th:action="@{'/create-wish/' + ${wishlist-id}}" method="post">
         <div class="text-field">
             <input name="item_description" type="text" required>
             <span></span>
