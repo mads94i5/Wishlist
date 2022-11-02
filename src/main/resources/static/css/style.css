@@ -279,3 +279,9 @@ td  {
     text-align: center;
     background-color: white;
 }
+
+html{
+    height: 130%;
+    margin: auto;
+    overflow: scroll;
+}

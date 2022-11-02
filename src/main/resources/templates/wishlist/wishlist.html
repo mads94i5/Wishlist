@@ -27,9 +27,9 @@
     </tr>
 </table>
 </div>
-<form th:action="@{'/create-wish/' + ${id}}">
-    <input type="submit" value="Create Wish">
-</form>
+<a th:href="@{'/create-wish/' + ${id}}" style="margin-left: 300px; margin-right: auto">
+    <input style="max-width: 800px" type="submit" value="Create Wish">
+</a>
 <div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>
