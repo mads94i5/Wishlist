@@ -2,6 +2,7 @@ package com.example.wishlist.api;
 
 import com.example.wishlist.dao.WishlistRepository;
 import com.example.wishlist.ents.Wish;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,9 +61,9 @@ public class WishlistController {
   @PostMapping("/create-wish/{id}")
   public String addWish(Model model, @PathVariable("id") Long id,
                               @RequestParam("item_description") String description,
-                              @RequestParam("item_price") double price,
-                              @RequestParam("item_url") String itemLink,
-                              @RequestParam("item_comment") String comment){
+                              @Nullable @RequestParam("item_price") double price,
+                              @Nullable @RequestParam("item_url") String itemLink,
+                              @Nullable @RequestParam("item_comment") String comment){
 
     Wish newWish = new Wish(description, price, itemLink, comment, false, id);
     model.addAttribute("wish", newWish);

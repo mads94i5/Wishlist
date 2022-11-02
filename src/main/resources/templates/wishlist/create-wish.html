@@ -6,9 +6,9 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <title>Title</title>
 </head>
-<body>
+<body style="overflow: scroll; margin-bottom: 200px; margin-top: -100px">
 <div th:insert="fragments/navbar :: navbar"></div>
-
+<div>
 <div class="box-of-user-prompts">
     <h1>New Wish</h1>
     <form th:action="@{'/create-wish/' + ${id}}" method="post">
@@ -39,7 +39,8 @@
         <input type="submit" value="Create Wish">
     </form>
 </div>
+</div>
 
-<div th:insert="fragments/footer :: footer"></div>
 </body>
+<div th:insert="fragments/footer :: footer"></div>
 </html>
