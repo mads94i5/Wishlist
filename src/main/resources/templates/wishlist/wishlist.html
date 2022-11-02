@@ -28,11 +28,12 @@
         <td><form method="post"><input type="checkbox" th:checked="${i.reserved ? true: false}" name="reserved"><input type="hidden" th:value="${i.id}" name='id'/><input type="submit" value="OK"></form></td>
 
     </tr>
-
 </table>
-    <a th:href="@{'/create-wish/' + ${id}}" style="margin-left: 290px; margin-right: auto">
-        <input style="max-width: 800px" type="submit" value="Create Wish">
-    </a>
+    <div style="padding-left: 30%; padding-right: 30%">
+        <a th:href="@{'/create-wish/' + ${id}}">
+            <input style="width: 800px; max-width: 100%;" type="submit" value="Create Wish">
+        </a>
+    </div>
 </div>
 
 <div th:insert="fragments/footer :: footer"></div>

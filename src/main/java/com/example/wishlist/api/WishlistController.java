@@ -54,7 +54,7 @@ public class WishlistController {
     } else {
     wishlistRepository.createWishlist(loginId);
     Long wishlistId = wishlistRepository.findNewWishList(loginId);
-    return "redirect:/create-wish/" + wishlistId;
+    return "redirect:/wishlist/" + wishlistId;
     }
   }
 

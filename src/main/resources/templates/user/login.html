@@ -12,6 +12,15 @@
 <div th:insert="fragments/navbar :: navbar"></div>
 
 
+<div class="content" style="padding-left: 30%; padding-right: 30%">
+    <a href="/logout">
+        <input style="width: 800px; max-width: 100%;" type="submit" value="Logout">
+    </a>
+    <a href="/create-user">
+        <input style="width: 800px; max-width: 100%; margin-top: 1em" type="submit" value="Register">
+    </a>
+</div>
+
 <div class="box-of-user-prompts">
     <h1>Login</h1>
     <div class="invalid_login" th:if="${param.error}">

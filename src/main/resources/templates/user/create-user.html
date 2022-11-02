@@ -9,7 +9,6 @@
 <body>
 <div th:insert="fragments/navbar :: navbar"></div>
 
-
 <div class="box-of-user-prompts">
     <h1>Sign-Up</h1>
     <form th:action="@{/create-user}" method="post" th:object="${user}">

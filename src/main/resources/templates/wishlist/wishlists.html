@@ -18,6 +18,11 @@
     <td th:text="${wl.id}">Wishlist ID</td>
     <td><a th:href="@{'/wishlist/' + ${wl.id}}">Se ønskeliste</a></td>
 </table>
+  <div style="padding-left: 30%; padding-right: 30%">
+    <a href="/create-wishlist">
+      <input style="width: 800px; max-width: 100%;" type="submit" value="Create Wishlist">
+    </a>
+  </div>
 </div>
 <div th:insert="fragments/footer :: footer"></div>
 </body>
