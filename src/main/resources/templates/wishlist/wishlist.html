@@ -6,13 +6,13 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <title>Wishlist</title>
 </head>
-<body>
+
+<body class="content">
 <div th:insert="fragments/navbar :: navbar"></div>
 
 <div>
 <table class="table">
     <tr>
-        <th>Nr.</th>
         <th style="width: 200px">Beskrivelse</th>
         <th style="width: 75px">Pris</th>
         <th style="width: 200px">Link</th>
@@ -20,7 +20,6 @@
         <th style="width: 75px">Reserveret</th>
     </tr>
     <tr th:each="i : ${wishlist}">
-        <td th:text="${i.id}">Nr.</td>
         <td th:text="${i.description}">Beskrivelse</td>
         <td th:text="${i.price}">Pris</td>
         <td th:text="${i.itemLink}">Link</td>
@@ -29,6 +28,10 @@
     </tr>
 </table>
 </div>
+<a th:href="@{'/create-wish/' + ${id}}" style="margin-left: 290px; margin-right: auto">
+    <input style="max-width: 800px" type="submit" value="Create Wish">
+</a>
 <div th:insert="fragments/footer :: footer"></div>
 </body>
+
 </html>

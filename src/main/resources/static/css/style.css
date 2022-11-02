@@ -196,6 +196,7 @@ body {
 
 footer {
     background: #1F2F98;
+    margin-top: -5px;
     position: fixed;
     bottom: 0px;
     width: 100%;
@@ -277,4 +278,11 @@ td  {
     border-collapse: collapse;
     text-align: center;
     background-color: white;
+    border-radius: 10px;
+}
+
+.content{
+    height: 100%;
+    overflow: scroll;
+    margin-bottom: 150px;
 }
