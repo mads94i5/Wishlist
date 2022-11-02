@@ -4,10 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <title>Title</title>
+    <title>Wishlists</title>
 </head>
-<body>
+
+<body class="content">
 <div th:insert="fragments/navbar :: navbar"></div>
+<div>
 <table class="table">
   <tr>
     <th>Wishlist ID</th>
@@ -16,6 +18,7 @@
     <td th:text="${wl.id}">Wishlist ID</td>
     <td><a th:href="@{'/wishlist/' + ${wl.id}}">Se ønskeliste</a></td>
 </table>
+</div>
 <div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>

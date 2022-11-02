@@ -278,10 +278,11 @@ td  {
     border-collapse: collapse;
     text-align: center;
     background-color: white;
+    border-radius: 10px;
 }
 
-html{
-    height: 130%;
-    margin: auto;
+.content{
+    height: 100%;
     overflow: scroll;
+    margin-bottom: 150px;
 }
