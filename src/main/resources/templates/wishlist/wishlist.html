@@ -12,7 +12,6 @@
 <div>
 <table class="table">
     <tr>
-        <th>Nr.</th>
         <th style="width: 200px">Beskrivelse</th>
         <th style="width: 75px">Pris</th>
         <th style="width: 200px">Link</th>
@@ -20,7 +19,6 @@
         <th style="width: 75px">Reserveret</th>
     </tr>
     <tr th:each="i : ${wishlist}">
-        <td th:text="${i.id}">Nr.</td>
         <td th:text="${i.description}">Beskrivelse</td>
         <td th:text="${i.price}">Pris</td>
         <td th:text="${i.itemLink}">Link</td>
@@ -29,6 +27,9 @@
     </tr>
 </table>
 </div>
+<form th:action="@{'/create-wish/' + ${id}}">
+    <input type="submit" value="Create Wish">
+</form>
 <div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>

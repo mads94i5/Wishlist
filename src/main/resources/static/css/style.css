@@ -196,6 +196,7 @@ body {
 
 footer {
     background: #1F2F98;
+    margin-top: -5px;
     position: fixed;
     bottom: 0px;
     width: 100%;
