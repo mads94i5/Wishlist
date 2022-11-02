@@ -27,6 +27,6 @@ public class RegistrationController {
   @PostMapping
   public String registerUserAccount(@ModelAttribute("user") User user) {
     userService.create(user);
-    return "redirect:/create-user?success";
+    return "redirect:/createUser-user?success";
   }
 }

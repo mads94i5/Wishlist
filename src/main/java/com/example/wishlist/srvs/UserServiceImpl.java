@@ -21,12 +21,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User create(User user) {
         User newUser = new User(user.getUserName(), encryption.encode(user.getPassword()));
-        return userRepo.create(newUser);
+        return userRepo.createUser(newUser);
     }
 
     @Override
     public boolean loginUser(String userName, String password) {
-        List<User> users = userRepo.getAll();
+        List<User> users = userRepo.getAllUsers();
         for (User user : users) {
             if ((userName.equals(user.getUserName())) && (encryption.matches(password, user.getPassword()))) {
                 return true;

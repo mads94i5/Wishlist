@@ -28,7 +28,7 @@ public class WishlistRepository {
             foundId = rs.getLong(1);
 
         } catch (SQLException e) {
-            System.out.println("Cannot connect to database.");
+            System.out.println("findByUserId: Cannot connect to database.");
             e.printStackTrace();
         }
         return foundId;
@@ -59,7 +59,7 @@ public class WishlistRepository {
 
             }
         } catch (SQLException e) {
-            System.out.println("Cannot connect to database.");
+            System.out.println("showWishLists: Cannot connect to database.");
             e.printStackTrace();
         }
         return wishlists;
@@ -72,7 +72,7 @@ public class WishlistRepository {
             Connection conn = new MySQLConnector().getConnection();
 
             String query = "select * from wishes w " +
-                "left join wishlist wl " +
+                "left join wishlists wl " +
                 "on wl.id = w.wishlist_id " +
                 "where wl.id = ?";
             PreparedStatement psts = conn.prepareStatement(query);
@@ -92,7 +92,7 @@ public class WishlistRepository {
 
             }
         } catch (SQLException e) {
-            System.out.println("Cannot connect to database.");
+            System.out.println("showWishes: Cannot connect to database.");
             e.printStackTrace();
         }
         return wishlist;
@@ -116,7 +116,7 @@ public class WishlistRepository {
             psts.executeQuery();
 
         } catch (SQLException e) {
-            System.out.println("Cannot connect to database.");
+            System.out.println("addWish: Cannot connect to database.");
             e.printStackTrace();
         }
     }
@@ -126,9 +126,9 @@ public class WishlistRepository {
         try {
             Connection conn = new MySQLConnector().getConnection();
 
-            String query = "update wishes (reserved) " +
-                "values(?) " +
-                "where id = ?";
+            String query = "UPDATE wishes " +
+                "SET reserved=? " +
+                "WHERE id = ?";
             PreparedStatement psts = conn.prepareStatement(query);
 
             psts.setBoolean(1, reserved);
@@ -137,7 +137,7 @@ public class WishlistRepository {
             psts.executeQuery();
 
         } catch (SQLException e) {
-            System.out.println("Cannot connect to database.");
+            System.out.println("reserveWish: Cannot connect to database.");
             e.printStackTrace();
         }
     }
@@ -147,8 +147,8 @@ public class WishlistRepository {
         try {
             Connection conn = new MySQLConnector().getConnection();
 
-            String query = "insert into wishlists (user_id) " +
-                "values(?);";
+            String query = "INSERT INTO wishlists (user_id) " +
+                "VALUES(?);";
             PreparedStatement psts = conn.prepareStatement(query);
 
             psts.setLong(1, userId);
@@ -156,7 +156,7 @@ public class WishlistRepository {
             psts.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("Cannot connect to database.");
+            System.out.println("createWishlist: Cannot connect to database.");
             e.printStackTrace();
         }
     }
@@ -167,10 +167,9 @@ public class WishlistRepository {
         try {
             Connection conn = new MySQLConnector().getConnection();
 
-            String query = "select id " +
-                "from wishlists " +
-                "where user_id = ? " +
-                "order by id desc " +
+            String query = "SELECT id FROM wishlists " +
+                "WHERE user_id = ? " +
+                "ORDER BY id DESC " +
                 "LIMIT 1;";
             PreparedStatement psts = conn.prepareStatement(query);
 
@@ -182,7 +181,7 @@ public class WishlistRepository {
             foundId = rs.getLong(1);
 
         } catch (SQLException e) {
-            System.out.println("Cannot connect to database.");
+            System.out.println("findNewWishList: Cannot connect to database.");
             e.printStackTrace();
         }
         return foundId;

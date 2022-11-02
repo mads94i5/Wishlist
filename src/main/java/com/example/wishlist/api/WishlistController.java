@@ -8,11 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.net.URL;
-import java.net.http.HttpRequest;
 
 @Controller
 public class WishlistController {
@@ -43,6 +40,14 @@ public class WishlistController {
     return "wishlist/wishlist";
   }
 
+  @PostMapping("/wishlist/{id}")
+  public String reserveWish(@PathVariable("id") Long id, @RequestParam("reserved") boolean reserved, @RequestParam("id") Long wishId){
+
+    wishlistRepository.reserveWish(wishId, reserved);
+
+    return "redirect:/wishlist/" + id;
+  }
+
   @GetMapping("/create-wishlist")
   public String createWishList(HttpSession session) {
     Long logInId = (Long) session.getAttribute("LOGIN_ID");
@@ -52,8 +57,8 @@ public class WishlistController {
   }
 
   @GetMapping("/create-wish/{id}")
-  public String createWish(@PathVariable("id") Long id) {
-
+  public String createWish(@PathVariable("id") Long id, Model model) {
+    model.addAttribute("wishlist-id", id);
     return "wishlist/create-wish";
   }
 
@@ -62,22 +67,14 @@ public class WishlistController {
                               @RequestParam("item_description") String description,
                               @RequestParam("item_price") double price,
                               @RequestParam("item_url") URL itemLink,
-                              @RequestParam("item_comment") String comment){
+                              @RequestParam("item_comment") String comment) {
 
     Wish newWish = new Wish(description, price, itemLink, comment, false, id);
     model.addAttribute("wish", newWish);
 
     wishlistRepository.addWish(newWish, id);
 
-    return "redirect:/wishlist/{id}";
-  }
-
-  @PostMapping("/wishlist/{id}")
-  public String reserveWish(@PathVariable Long id, @RequestParam("reserved") boolean reserved, @RequestParam("id") Long wishId){
-
-    wishlistRepository.reserveWish(wishId, reserved);
-
-    return "redirect:/wishlist/{id}";
+    return "redirect:/wishlist/" + id;
   }
 
 }

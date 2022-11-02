@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public class UserRepository {
-    public List<User> getAll() {
+    public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         try {
             Connection conn = new MySQLConnector().getConnection();
@@ -24,7 +24,7 @@ public class UserRepository {
                 users.add(new User(id, userName, password));
             }
         } catch (SQLException e) {
-            System.out.println("Cannot connect to database.");
+            System.out.println("getAllUsers: Cannot connect to database.");
             e.printStackTrace();
         }
         return users;
@@ -46,7 +46,7 @@ public class UserRepository {
                 userId = resultSet.getLong(1);
             }
         } catch (SQLException e) {
-            System.out.println("Cannot connect to database.");
+            System.out.println("findIdByUser: Cannot connect to database.");
             e.printStackTrace();
         }
         return userId;
@@ -70,7 +70,7 @@ public class UserRepository {
                 user = new User(id, userName, password);
             }
         } catch (SQLException e) {
-            System.out.println("Cannot connect to database.");
+            System.out.println("findUserById: Cannot connect to database.");
             e.printStackTrace();
         }
         return user;
@@ -91,7 +91,7 @@ public class UserRepository {
                 userName = resultSet.getString(2);
             }
         } catch (SQLException e) {
-            System.out.println("Cannot connect to database.");
+            System.out.println("findUserNameById: Cannot connect to database.");
             e.printStackTrace();
         }
         return userName;
@@ -115,12 +115,12 @@ public class UserRepository {
                 user = new User(id, userName, password);
             }
         } catch (SQLException e) {
-            System.out.println("Cannot connect to database.");
+            System.out.println("findUserByUserName: Cannot connect to database.");
             e.printStackTrace();
         }
         return user;
     }
-    public User create(User newUser) {
+    public User createUser(User newUser) {
         try {
             Connection conn = new MySQLConnector().getConnection();
             // Connection conn = DriverManager.getConnection(db_url, "root", "test");
@@ -133,12 +133,12 @@ public class UserRepository {
 
             psts.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Cannot connect to database.");
+            System.out.println("createUser: Cannot connect to database.");
             e.printStackTrace();
         }
         return newUser;
     }
-    public void update(User user) {
+    public void updateUser(User user) {
         try {
             Connection conn = new MySQLConnector().getConnection();
 
@@ -152,12 +152,12 @@ public class UserRepository {
 
             psts.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Cannot connect to database.");
+            System.out.println("updateUser: Cannot connect to database.");
             e.printStackTrace();
         }
     }
 
-    public void deleteById(int id) {
+    public void deleteUserById(int id) {
         try {
             Connection conn = new MySQLConnector().getConnection();
 
@@ -168,7 +168,7 @@ public class UserRepository {
 
             psts.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Cannot connect to database.");
+            System.out.println("deleteUserById: Cannot connect to database.");
             e.printStackTrace();
         }
     }
