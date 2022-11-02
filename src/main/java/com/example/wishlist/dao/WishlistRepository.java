@@ -89,7 +89,7 @@ public class WishlistRepository {
                 String comment = rs.getString(5);
                 boolean reserved = rs.getBoolean(6);
 
-                wishlist.add(new Wish(description, price, url, comment, reserved, wishListId));
+                wishlist.add(new Wish(wishId, description, price, url, comment, reserved, wishListId));
 
             }
         } catch (SQLException e) {
