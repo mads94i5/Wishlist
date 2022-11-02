@@ -82,11 +82,12 @@ public class WishlistRepository {
             ResultSet rs = psts.executeQuery();
 
             while (rs.next()){
-                String description = rs.getString(1);
-                double price = rs.getDouble(2);
-                String url = rs.getString(3);
-                String comment = rs.getString(4);
-                boolean reserved = rs.getBoolean(5);
+                Long wishId = rs.getLong(1);
+                String description = rs.getString(2);
+                double price = rs.getDouble(3);
+                String url = rs.getString(4);
+                String comment = rs.getString(5);
+                boolean reserved = rs.getBoolean(6);
 
                 wishlist.add(new Wish(description, price, url, comment, reserved, wishListId));
 
