@@ -128,15 +128,15 @@ public class WishlistRepository {
         try {
             Connection conn = new MySQLConnector().getConnection();
 
-            String query = "UPDATE wishes " +
-                "SET reserved=? " +
-                "WHERE id = ?";
+            String query = "update wishes " +
+                "set reserved = ? " +
+                "where id = ?";
             PreparedStatement psts = conn.prepareStatement(query);
 
             psts.setBoolean(1, reserved);
             psts.setLong(2, wishId);
 
-            psts.executeQuery();
+            psts.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println("reserveWish: Cannot connect to database.");
@@ -149,8 +149,8 @@ public class WishlistRepository {
         try {
             Connection conn = new MySQLConnector().getConnection();
 
-            String query = "INSERT INTO wishlists (user_id) " +
-                "VALUES(?);";
+            String query = "insert into wishlists (user_id) " +
+                "values(?);";
             PreparedStatement psts = conn.prepareStatement(query);
 
             psts.setLong(1, userId);
@@ -169,9 +169,10 @@ public class WishlistRepository {
         try {
             Connection conn = new MySQLConnector().getConnection();
 
-            String query = "SELECT id FROM wishlists " +
-                "WHERE user_id = ? " +
-                "ORDER BY id DESC " +
+            String query = "select id " +
+                "from wishlists " +
+                "where user_id = ? " +
+                "order by id desc " +
                 "LIMIT 1;";
             PreparedStatement psts = conn.prepareStatement(query);
 

@@ -8,7 +8,6 @@
 </head>
 <body class="content">
 <div th:insert="fragments/navbar :: navbar"></div>
-<div>
 <div class="box-of-user-prompts">
     <h1>New Wish</h1>
     <form th:action="@{'/create-wish/' + ${id}}" method="post">
@@ -39,8 +38,7 @@
         <input type="submit" value="Create Wish">
     </form>
 </div>
-</div>
-
-</body>
 <div th:insert="fragments/footer :: footer"></div>
+</body>
+
 </html>

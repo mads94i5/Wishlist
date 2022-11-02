@@ -24,8 +24,11 @@
         <td th:text="${i.price}">Pris</td>
         <td th:text="${i.itemLink}">Link</td>
         <td th:text="${i.comment}">Kommentar</td>
-        <td th:text="${i.reserved}"><form th:action="@{'/wishlist/' + ${i.wishListId}}" method="post"><input type="checkbox" th:field="*{i.reserved}" name="reserved"><input type="hidden" th:value="*{i.id}" name="id"></form></td>
+        <td th:text="${i.reserved}"></td>
+        <!--<td><form method="post"><input type="checkbox" th:checked="${i.reserved ? true: false}" name="reserved"><input type="hidden" th:value="${i.id}" name='id'/><input type="submit" value="OK"></form></td>-->
+
     </tr>
+
 </table>
     <a th:href="@{'/create-wish/' + ${id}}" style="margin-left: 290px; margin-right: auto">
         <input style="max-width: 800px" type="submit" value="Create Wish">

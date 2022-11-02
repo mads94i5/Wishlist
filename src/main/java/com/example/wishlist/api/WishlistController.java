@@ -81,7 +81,6 @@ public class WishlistController {
 
   @PostMapping("/wishlist/{id}")
   public String reserveWish(@PathVariable Long id, @RequestParam("reserved") boolean reserved, @RequestParam("id") Long wishId){
-
     wishlistRepository.reserveWish(wishId, reserved);
 
     return "redirect:/wishlist/{id}";
