@@ -28,12 +28,14 @@ public class WishlistController {
   @GetMapping("/wishlists")
   public String wishlist(Model model, HttpSession session){
     Long loginId = (Long) session.getAttribute("LOGIN_ID");
+    if (loginId == null) {
+      return "user/error";
+    } else {
+      model.addAttribute("LOGIN_ID", loginId);
+      model.addAttribute("wishlists", wishlistRepository.showWishLists(loginId));
 
-    model.addAttribute("LOGIN_ID", loginId);
-
-    model.addAttribute("wishlists", wishlistRepository.showWishLists(loginId));
-
-    return "wishlist/wishlists";
+      return "wishlist/wishlists";
+    }
   }
 
   @GetMapping("/wishlist/{id}")
@@ -46,10 +48,14 @@ public class WishlistController {
 
   @GetMapping("/create-wishlist")
   public String createWishList(HttpSession session) {
-    Long logInId = (Long) session.getAttribute("LOGIN_ID");
-    wishlistRepository.createWishlist(logInId);
-    Long wishlistId = wishlistRepository.findNewWishList(logInId);
+    Long loginId = (Long) session.getAttribute("LOGIN_ID");
+    if (loginId == null) {
+      return "user/error";
+    } else {
+    wishlistRepository.createWishlist(loginId);
+    Long wishlistId = wishlistRepository.findNewWishList(loginId);
     return "redirect:/create-wish/" + wishlistId;
+    }
   }
 
   @GetMapping("/create-wish/{id}")
