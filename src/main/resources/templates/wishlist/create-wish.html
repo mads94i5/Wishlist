@@ -11,15 +11,15 @@
 
 <div class="box-of-user-prompts">
     <h1>New Wish</h1>
-    <form th:action="@{'/create-wish/' + ${wishlist-id}}" method="post">
+    <form th:action="@{'/create-wish/' + ${id}}" method="post">
         <div class="text-field">
-            <input name="item_description" type="text" required>
+            <input type="text" name="item_description" required>
             <span></span>
             <label>Beskrivelse</label>
         </div>
 
         <div class="text-field">
-            <input name="item-price" type="number">
+            <input name="item_price" type="number">
             <span></span>
             <label>Pris</label>
         </div>

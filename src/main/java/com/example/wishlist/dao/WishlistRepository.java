@@ -82,11 +82,12 @@ public class WishlistRepository {
             ResultSet rs = psts.executeQuery();
 
             while (rs.next()){
-                String description = rs.getString(1);
-                double price = rs.getDouble(2);
-                URL url = rs.getURL(3);
-                String comment = rs.getString(4);
-                boolean reserved = rs.getBoolean(5);
+                Long wishId = rs.getLong(1);
+                String description = rs.getString(2);
+                double price = rs.getDouble(3);
+                String url = rs.getString(4);
+                String comment = rs.getString(5);
+                boolean reserved = rs.getBoolean(6);
 
                 wishlist.add(new Wish(description, price, url, comment, reserved, wishListId));
 
@@ -103,17 +104,18 @@ public class WishlistRepository {
         try {
             Connection conn = new MySQLConnector().getConnection();
 
-            String query = "insert into wishes (item_description, price, url, item_comment, wishlist_id) " +
+            String query = "insert into wishes (item_description, price, url, item_comment, reserved, wishlist_id) " +
                 "values(?, ?, ?, ?, ?, ?)";
             PreparedStatement psts = conn.prepareStatement(query);
 
             psts.setString(1, wish.getDescription());
             psts.setDouble(2, wish.getPrice());
-            psts.setURL(3, wish.getItemLink());
+            psts.setString(3, wish.getItemLink());
             psts.setString(4, wish.getComment());
-            psts.setLong(5, id);
+            psts.setBoolean(5, wish.isReserved());
+            psts.setLong(6, id);
 
-            psts.executeQuery();
+            psts.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println("addWish: Cannot connect to database.");

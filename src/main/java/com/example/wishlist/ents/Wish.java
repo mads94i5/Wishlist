@@ -6,12 +6,12 @@ public class Wish {
   private Long id;
   private String description;
   private double price;
-  private URL itemLink;
+  private String itemLink;
   private String comment;
   private boolean reserved;
   private Long wishListId;
 
-  public Wish(String description, double price, URL itemLink, String comment, boolean reserved, Long wishListId) {
+  public Wish(String description, double price, String itemLink, String comment, boolean reserved, Long wishListId) {
     this.description = description;
     this.price = price;
     this.itemLink = itemLink;
@@ -20,7 +20,7 @@ public class Wish {
     this.wishListId = wishListId;
   }
 
-  public Wish(Long id, String description, double price, URL itemLink, String comment, boolean reserved, Long wishListId) {
+  public Wish(Long id, String description, double price, String itemLink, String comment, boolean reserved, Long wishListId) {
     this.id = id;
     this.description = description;
     this.price = price;
@@ -49,11 +49,11 @@ public class Wish {
     this.price = price;
   }
 
-  public URL getItemLink() {
+  public String getItemLink() {
     return itemLink;
   }
 
-  public void setItemLink(URL itemLink) {
+  public void setItemLink(String itemLink) {
     this.itemLink = itemLink;
   }
 
