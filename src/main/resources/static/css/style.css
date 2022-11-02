@@ -37,6 +37,8 @@ nav {
     min-height: 350px;
     background: white;
     border-radius: 10px;
+    margin-top: 50px;
+    z-index: -1;
 }
 
 .box-of-user-prompts h1 {
