@@ -4,7 +4,6 @@ nav {
     width: 100%;
     position: fixed;
     top: 0;
-    margin-bottom: 200px;
 }
 
 #title {
@@ -173,7 +172,7 @@ body {
 }
 
 .row {
-    margin-top: 120px;
+    margin-top: 220px;
     display: flex;
 }
 
