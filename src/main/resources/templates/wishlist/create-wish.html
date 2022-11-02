@@ -9,27 +9,36 @@
 <body>
 <div th:insert="fragments/navbar :: navbar"></div>
 
+<div class="box-of-user-prompts">
+    <h1>New Wish</h1>
+    <form th:action="@{'/create-wish/' + ${id}}" method="post">
+        <div class="text-field">
+            <input type="text" name="item_description" type="text" required>
+            <span></span>
+            <label>Beskrivelse</label>
+        </div>
 
-<form th:action="@{'/create-wish/' + ${id}}" method="post">
-    <div class="item-description-input">
-        <label>Beskrivelse<input type="text" name="item_description" required></label>
-    </div>
+        <div class="text-field">
+            <input name="item-price" type="number">
+            <span></span>
+            <label>Pris</label>
+        </div>
 
-    <div class="item-price-input">
-        <label>Pris<input type="number" name="item_price"></label>
-    </div>
+        <div class="commentary-box">
+            <input name="item_comment" type="text">
+            <span></span>
+            <label>Kommentar</label>
+        </div>
 
-    <div class="item-comment-input">
-        <label>Kommentar<input type="text" name="item_comment"></label>
-    </div>
+        <div class="text-field">
+            <input name="item_url" type="text">
+            <span></span>
+            <label>Link</label>
+        </div>
 
-    <div class="item-url-input">
-        <label>Link<input type="text" name="item_url"></label>
-    </div>
-
-    <input type="submit" value="Create Wish">
-
-</form>
+        <input type="submit" value="Create Wish">
+    </form>
+</div>
 
 <div th:insert="fragments/footer :: footer"></div>
 </body>
