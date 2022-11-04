@@ -21,27 +21,35 @@
             <label>Username</label>
         </div>
         <div class="text-field">
-            <input th:field="*{password}" type="password" id="password" required onchange="checkPasswordConfirmation()">
+            <input th:field="*{password}" type="password" id="password" required>
             <span></span>
             <label>Password</label>
         </div>
 
         <div class="text-field">
-            <input type="password" id="confirm_pass" required onchange="checkPasswordConfirmation()">
+            <input type="password" id="confirm_pass" required onkeyup="checkPasswordConfirmation()">
             <span></span>
             <label>Confirm Password</label>
         </div>
 
-        <input type="submit" value="Register" id="submit">
+        <div class="password-mismatch-message">
+            <p id="password-mismatch-message" hidden>Confirmed password does not match</p>
+        </div>
+
+        <input type="submit" value="Register" id="submitForm" disabled>
 
         <script>
             function checkPasswordConfirmation() {
-                const password = document.getElementById('password')
-                const confirmedPassword = document.getElementById('confirm_pass')
-                const submit = document.getElementById('submit')
+                let password = document.getElementById('password').value;
+                let confirmedPassword = document.getElementById('confirm_pass').value;
+                let submit = document.getElementById('submitForm');
+                let message = document.getElementById('password-mismatch-message');
 
                 if (password === confirmedPassword){
-                    submit.disabled = false;
+                    message.hidden = true;
+                    submit.disabled=false;
+                } else {
+                    message.hidden = false;
                 }
             }
         </script>

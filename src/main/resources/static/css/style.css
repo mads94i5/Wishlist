@@ -236,7 +236,21 @@ footer {
 }
 
 .commentary-box label{
+    position: absolute;
+    top: 72%;
+    left: 50px;
+    color: white;
+    pointer-events: none;
+    transition: 0.2s;
+}
 
+.commentary-box input:focus ~ label{
+    color: #7dafd1;
+    top: 69%;
+}
+
+.password-mismatch-message{
+    color: red;
 }
 
 .footer-right-column {
