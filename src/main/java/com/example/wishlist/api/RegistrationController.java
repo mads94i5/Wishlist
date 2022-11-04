@@ -26,7 +26,11 @@ public class RegistrationController {
 
   @PostMapping
   public String registerUserAccount(@ModelAttribute("user") User user) {
-    userService.create(user);
-    return "redirect:/create-user?success";
+    if (userService.findIdByUser(user) == null) {
+      userService.create(user);
+      return "redirect:/create-user?success";
+    } else {
+      return "redirect:/create-user?alreadyexists";
+    }
   }
 }

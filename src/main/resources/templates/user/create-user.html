@@ -36,6 +36,10 @@
             <p id="password-mismatch-message" hidden>Confirmed password does not match</p>
         </div>
 
+        <div class="password-mismatch-message" th:if="${param.alreadyexists}">
+            <p>User already exists</p>
+        </div>
+
         <input type="submit" value="Register" id="submitForm" disabled>
 
         <script>
