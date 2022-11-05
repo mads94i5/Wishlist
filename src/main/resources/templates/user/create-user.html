@@ -41,6 +41,10 @@
             <p>User already exists</p>
         </div>
 
+        <div class="success-message" th:if="${param.success}">
+            <p>User successfully created</p>
+        </div>
+
         <input type="submit" value="Register" id="submitForm" disabled>
 
         <script>

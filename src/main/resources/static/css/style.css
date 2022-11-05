@@ -253,6 +253,10 @@ footer {
     color: red;
 }
 
+.success-message{
+    color: green;
+}
+
 .footer-right-column {
     float: right;
     width: 20%;
