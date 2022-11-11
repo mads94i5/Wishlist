@@ -12,7 +12,7 @@ public class UserRepository {
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         try {
-            Connection conn = new MySQLConnector().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection();
 
             PreparedStatement psts = conn.prepareStatement("SELECT * FROM users");
             ResultSet resultSet = psts.executeQuery();
@@ -33,7 +33,7 @@ public class UserRepository {
     public Long findIdByUser(User user) {
         Long userId = null;
         try {
-            Connection conn = new MySQLConnector().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection();
             // Connection conn = DriverManager.getConnection(db_url, "root", "test");
 
             PreparedStatement psts = conn.prepareStatement("SELECT * FROM users WHERE user_name=?");
@@ -54,7 +54,7 @@ public class UserRepository {
     public User findUserById(String userId) {
         User user = new User();
         try {
-            Connection conn = new MySQLConnector().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection();
             // Connection conn = DriverManager.getConnection(db_url, "root", "test");
 
             PreparedStatement psts = conn.prepareStatement("SELECT * FROM users WHERE id=?");
@@ -78,7 +78,7 @@ public class UserRepository {
     public String findUserNameById(String userId) {
         String userName = "";
         try {
-            Connection conn = new MySQLConnector().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection();
             // Connection conn = DriverManager.getConnection(db_url, "root", "test");
 
             PreparedStatement psts = conn.prepareStatement("SELECT * FROM users WHERE id=?");
@@ -99,7 +99,7 @@ public class UserRepository {
     public User findUserByUserName(String searchUserName) {
         User user = new User();
         try {
-            Connection conn = new MySQLConnector().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection();
             // Connection conn = DriverManager.getConnection(db_url, "root", "test");
 
             PreparedStatement psts = conn.prepareStatement("SELECT * FROM users WHERE user_name=?");
@@ -122,7 +122,7 @@ public class UserRepository {
     }
     public User createUser(User newUser) {
         try {
-            Connection conn = new MySQLConnector().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection();
             // Connection conn = DriverManager.getConnection(db_url, "root", "test");
 
             String query = "INSERT INTO users (user_name, user_password) VALUES (?, ?)";
@@ -140,7 +140,7 @@ public class UserRepository {
     }
     public void updateUser(User user) {
         try {
-            Connection conn = new MySQLConnector().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection();
 
             String query = "UPDATE users " +
                     "SET user_name=?, user_password=? WHERE id=?";
@@ -159,7 +159,7 @@ public class UserRepository {
 
     public void deleteUserById(int id) {
         try {
-            Connection conn = new MySQLConnector().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection();
 
             String query = "DELETE FROM users WHERE id=?";
             PreparedStatement psts = conn.prepareStatement(query);

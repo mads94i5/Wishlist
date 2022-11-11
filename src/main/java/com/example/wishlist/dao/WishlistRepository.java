@@ -15,7 +15,7 @@ public class WishlistRepository {
 
         Long foundId = null;
         try {
-            Connection conn = new MySQLConnector().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection();
 
             String query = "SELECT * FROM wishlists WHERE user_id=?";
             PreparedStatement psts = conn.prepareStatement(query);
@@ -38,7 +38,7 @@ public class WishlistRepository {
 
         List<Wishlist> wishlists = new LinkedList<>();
         try {
-            Connection conn = new MySQLConnector().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection();
 
             String query = "select * from wishlists w " +
                 "left join users u " +
@@ -69,7 +69,7 @@ public class WishlistRepository {
 
         List<Wish> wishlist = new LinkedList<>();
         try {
-            Connection conn = new MySQLConnector().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection();
 
             String query = "select * from wishes w " +
                 "left join wishlists wl " +
@@ -102,7 +102,7 @@ public class WishlistRepository {
     public void addWish(Wish wish, Long id){
 
         try {
-            Connection conn = new MySQLConnector().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection();
 
             String query = "insert into wishes (item_description, price, url, item_comment, reserved, wishlist_id) " +
                 "values(?, ?, ?, ?, ?, ?)";
@@ -126,7 +126,7 @@ public class WishlistRepository {
     public void reserveWish(Long wishId, boolean reserved){
 
         try {
-            Connection conn = new MySQLConnector().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection();
 
             String query = "update wishes " +
                 "set reserved = ? " +
@@ -147,7 +147,7 @@ public class WishlistRepository {
     public void createWishlist(Long userId){
 
         try {
-            Connection conn = new MySQLConnector().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection();
 
             String query = "insert into wishlists (user_id) " +
                 "values(?);";
@@ -167,7 +167,7 @@ public class WishlistRepository {
 
         Long foundId = null;
         try {
-            Connection conn = new MySQLConnector().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection();
 
             String query = "select id " +
                 "from wishlists " +
