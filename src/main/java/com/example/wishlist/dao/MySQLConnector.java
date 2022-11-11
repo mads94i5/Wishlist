@@ -7,13 +7,9 @@ import java.sql.*;
 public class MySQLConnector {
     private static MySQLConnector instance;
     private Connection conn;
-    // @Value does not work as intended on classes without Bean annotation like @Repository
-    // @Value("${spring.datasource.url}")
-    private final String url = System.getenv("spring.datasource.url");
-    // @Value("${spring.datasource.username}")
-    private final String user = System.getenv("spring.datasource.username");
-    // @Value("${spring.datasource.password}")
-    private final String pass = System.getenv("spring.datasource.password");
+    // private final String url = System.getenv("spring.datasource.url");
+    // private final String user = System.getenv("spring.datasource.username");
+    // private final String pass = System.getenv("spring.datasource.password");
 
     public static MySQLConnector getInstance() {
         if (instance == null) {
@@ -21,7 +17,7 @@ public class MySQLConnector {
         }
         return instance;
     }
-    public Connection getConnection() {
+    public Connection getConnection(String url, String user, String pass) {
         if (conn == null) {
             try {
                 conn = DriverManager.getConnection(url, user, pass);

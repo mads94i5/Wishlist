@@ -1,6 +1,7 @@
 package com.example.wishlist.dao;
 
 import com.example.wishlist.ents.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -9,10 +10,16 @@ import java.util.List;
 
 @Repository
 public class UserRepository {
+    @Value("${spring.datasource.url}")
+    private String url;
+    @Value("${spring.datasource.username}")
+    private String username;
+    @Value("${spring.datasource.password}")
+    private String password;
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         try {
-            Connection conn = MySQLConnector.getInstance().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection(url, username, password);
 
             PreparedStatement psts = conn.prepareStatement("SELECT * FROM users");
             ResultSet resultSet = psts.executeQuery();
@@ -33,8 +40,7 @@ public class UserRepository {
     public Long findIdByUser(User user) {
         Long userId = null;
         try {
-            Connection conn = MySQLConnector.getInstance().getConnection();
-            // Connection conn = DriverManager.getConnection(db_url, "root", "test");
+            Connection conn = MySQLConnector.getInstance().getConnection(url, username, password);
 
             PreparedStatement psts = conn.prepareStatement("SELECT * FROM users WHERE user_name=?");
 
@@ -54,8 +60,7 @@ public class UserRepository {
     public User findUserById(String userId) {
         User user = new User();
         try {
-            Connection conn = MySQLConnector.getInstance().getConnection();
-            // Connection conn = DriverManager.getConnection(db_url, "root", "test");
+            Connection conn = MySQLConnector.getInstance().getConnection(url, username, password);
 
             PreparedStatement psts = conn.prepareStatement("SELECT * FROM users WHERE id=?");
 
@@ -78,8 +83,7 @@ public class UserRepository {
     public String findUserNameById(String userId) {
         String userName = "";
         try {
-            Connection conn = MySQLConnector.getInstance().getConnection();
-            // Connection conn = DriverManager.getConnection(db_url, "root", "test");
+            Connection conn = MySQLConnector.getInstance().getConnection(url, username, password);
 
             PreparedStatement psts = conn.prepareStatement("SELECT * FROM users WHERE id=?");
 
@@ -99,8 +103,7 @@ public class UserRepository {
     public User findUserByUserName(String searchUserName) {
         User user = new User();
         try {
-            Connection conn = MySQLConnector.getInstance().getConnection();
-            // Connection conn = DriverManager.getConnection(db_url, "root", "test");
+            Connection conn = MySQLConnector.getInstance().getConnection(url, username, password);
 
             PreparedStatement psts = conn.prepareStatement("SELECT * FROM users WHERE user_name=?");
 
@@ -122,8 +125,7 @@ public class UserRepository {
     }
     public User createUser(User newUser) {
         try {
-            Connection conn = MySQLConnector.getInstance().getConnection();
-            // Connection conn = DriverManager.getConnection(db_url, "root", "test");
+            Connection conn = MySQLConnector.getInstance().getConnection(url, username, password);
 
             String query = "INSERT INTO users (user_name, user_password) VALUES (?, ?)";
             PreparedStatement psts = conn.prepareStatement(query);
@@ -140,7 +142,7 @@ public class UserRepository {
     }
     public void updateUser(User user) {
         try {
-            Connection conn = MySQLConnector.getInstance().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection(url, username, password);
 
             String query = "UPDATE users " +
                     "SET user_name=?, user_password=? WHERE id=?";
@@ -159,7 +161,7 @@ public class UserRepository {
 
     public void deleteUserById(int id) {
         try {
-            Connection conn = MySQLConnector.getInstance().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection(url, username, password);
 
             String query = "DELETE FROM users WHERE id=?";
             PreparedStatement psts = conn.prepareStatement(query);

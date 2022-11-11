@@ -2,6 +2,7 @@ package com.example.wishlist.dao;
 
 import com.example.wishlist.ents.Wish;
 import com.example.wishlist.ents.Wishlist;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.net.URL;
@@ -11,11 +12,17 @@ import java.util.List;
 
 @Repository
 public class WishlistRepository {
+    @Value("${spring.datasource.url}")
+    private String url;
+    @Value("${spring.datasource.username}")
+    private String username;
+    @Value("${spring.datasource.password}")
+    private String password;
     public Long findByUserId(Long userId) {
 
         Long foundId = null;
         try {
-            Connection conn = MySQLConnector.getInstance().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection(url, username, password);
 
             String query = "SELECT * FROM wishlists WHERE user_id=?";
             PreparedStatement psts = conn.prepareStatement(query);
@@ -38,7 +45,7 @@ public class WishlistRepository {
 
         List<Wishlist> wishlists = new LinkedList<>();
         try {
-            Connection conn = MySQLConnector.getInstance().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection(url, username, password);
 
             String query = "select * from wishlists w " +
                 "left join users u " +
@@ -69,7 +76,7 @@ public class WishlistRepository {
 
         List<Wish> wishlist = new LinkedList<>();
         try {
-            Connection conn = MySQLConnector.getInstance().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection(url, username, password);
 
             String query = "select * from wishes w " +
                 "left join wishlists wl " +
@@ -102,7 +109,7 @@ public class WishlistRepository {
     public void addWish(Wish wish, Long id){
 
         try {
-            Connection conn = MySQLConnector.getInstance().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection(url, username, password);
 
             String query = "insert into wishes (item_description, price, url, item_comment, reserved, wishlist_id) " +
                 "values(?, ?, ?, ?, ?, ?)";
@@ -126,7 +133,7 @@ public class WishlistRepository {
     public void reserveWish(Long wishId, boolean reserved){
 
         try {
-            Connection conn = MySQLConnector.getInstance().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection(url, username, password);
 
             String query = "update wishes " +
                 "set reserved = ? " +
@@ -147,7 +154,7 @@ public class WishlistRepository {
     public void createWishlist(Long userId){
 
         try {
-            Connection conn = MySQLConnector.getInstance().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection(url, username, password);
 
             String query = "insert into wishlists (user_id) " +
                 "values(?);";
@@ -167,7 +174,7 @@ public class WishlistRepository {
 
         Long foundId = null;
         try {
-            Connection conn = MySQLConnector.getInstance().getConnection();
+            Connection conn = MySQLConnector.getInstance().getConnection(url, username, password);
 
             String query = "select id " +
                 "from wishlists " +
