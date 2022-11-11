@@ -6,7 +6,7 @@ import java.sql.*;
 
 public class MySQLConnector {
     private static MySQLConnector instance;
-    private Connection conn = null;
+    private Connection conn;
     // @Value does not work as intended on classes without Bean annotation like @Repository
     // @Value("${spring.datasource.url}")
     private final String url = System.getenv("spring.datasource.url");
