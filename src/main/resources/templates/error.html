@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/img/well.png">
+    <title>Wishing Well | Error</title>
 </head>
 <body>
 <div th:insert="fragments/navbar :: navbar"></div>
-
+<div style="text-align: center; margin-top: 100px; color: white; font-size: xx-large">Error!<br>Something went wrong.<br>You may have entered a broken link. </div>
+<div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>

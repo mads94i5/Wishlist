@@ -1,28 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <title>Frontpage</title>
+    <link rel="icon" type="image/x-icon" href="/img/well.png">
+    <title>Wishing Well | Frontpage</title>
 </head>
 <body>
 <div th:insert="fragments/navbar :: navbar"></div>
 
 <div class="row">
-    <div class="column">
+    <div class="column" style="margin-top: -5%">
 
-    <img src="img/well.png" height="400" width="400">
+    <img src="/img/well.png" height="400" width="400">
     </div>
     <div class="column2">
 
-    <h2 style="text-align: center">Velkommen til Wishing Well</h2>
-    <p style="font-size: x-large">Wishing Well er Danmarks nye sted til nemt at lave, og dele ønskelister.</p>
-        <ul style="font-size: x-large">
-            <li>Opret en bruger</li>
-            <li>Opret så mange ønskelister du vil</li>
-            <li>Del dem med din familie og venner</li>
-        </ul>
+    <h1 style="text-align: center">Velkommen til Wishing Well</h1>
+    <p style="font-size: x-large">Wishing Well er Danmarks<br>nye sted til nemt at lave,<br>og dele ønskelister.</p>
+        <div style="font-size: large">
+            <p>- Opret en bruger</p>
+            <p>- Opret så mange ønskelister som du vil</p>
+            <p>- Del dem med din familie og venner</p>
+            <p>- Andre kan anonymt reservere dine ønsker</p>
+        </div>
     </div>
 </div>
 <div th:insert="fragments/footer :: footer"></div>

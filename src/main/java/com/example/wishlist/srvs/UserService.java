@@ -1,9 +1,11 @@
 package com.example.wishlist.srvs;
 
-import com.example.wishlist.dao.UserDto;
 import com.example.wishlist.ents.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface UserService extends UserDetailsService {
-    User create(UserDto userDto);
+public interface UserService {
+    User create(User user);
+    boolean loginUser(String userName, String password);
+    User findUserById(String id);
+    Long findIdByUser(User user);
+    String findUserNameById(String id);
 }

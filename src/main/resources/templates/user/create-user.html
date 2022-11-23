@@ -1,23 +1,69 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <title>Title</title>
+    <link rel="icon" type="image/x-icon" href="/img/well.png">
+    <title>Wishing Well | Create User</title>
 </head>
 <body>
 <div th:insert="fragments/navbar :: navbar"></div>
 
-<form th:action="@{/create-user}" method="post" th:object="${user}">
+<div class="box-of-user-prompts">
+    <h1>Sign-Up</h1>
+    <form th:action="@{/create-user}" method="post" th:object="${user}">
 
-    <!--<label>E-mail address: <input type="text" name="email"><br><br></label> -->
+        <!--<label>E-mail address: <input type="text" name="email"><br><br></label> -->
 
-    <label>Username: <input id="usernameInput" th:field="*{userName}" type="text" name="username"><br><br></label>
-    <label>Password: <input th:field="*{password}" type="password" id="password" name="password"><br><br></label>
-    <input type="submit" value="Register">
+        <div class="text-field">
+            <input th:field="*{userName}" type="text" required>
+            <span></span>
+            <label>Username</label>
+        </div>
+        <div class="text-field">
+            <input th:field="*{password}" type="password" id="password" required>
+            <span></span>
+            <label>Password</label>
+        </div>
 
-</form>
+        <div class="text-field">
+            <input type="password" id="confirm_pass" required onkeyup="checkPasswordConfirmation()">
+            <span></span>
+            <label>Confirm Password</label>
+        </div>
+
+        <div class="password-mismatch-message">
+            <p id="password-mismatch-message" hidden>Confirmed password does not match</p>
+        </div>
+
+        <div class="password-mismatch-message" th:if="${param.alreadyexists}">
+            <p>User already exists</p>
+        </div>
+
+        <div class="success-message" th:if="${param.success}">
+            <p>User successfully created</p>
+        </div>
+
+        <input type="submit" value="Register" id="submitForm" disabled>
+
+        <script>
+            function checkPasswordConfirmation() {
+                let password = document.getElementById('password').value;
+                let confirmedPassword = document.getElementById('confirm_pass').value;
+                let submit = document.getElementById('submitForm');
+                let message = document.getElementById('password-mismatch-message');
+
+                if (password === confirmedPassword){
+                    message.hidden = true;
+                    submit.disabled=false;
+                } else {
+                    message.hidden = false;
+                }
+            }
+        </script>
+    </form>
+</div>
 
 <div th:insert="fragments/footer :: footer"></div>
 

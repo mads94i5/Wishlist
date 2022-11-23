@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/img/well.png">
+    <title>Wishing Well | Create wish</title>
+</head>
+<body class="content">
+<div th:insert="fragments/navbar :: navbar"></div>
+<div class="box-of-user-prompts">
+    <h1>New Wish</h1>
+    <form method="post" th:action="@{'/create-wish/' + ${id}}">
+        <div class="text-field">
+            <input type="text" name="item_description" required>
+            <span></span>
+            <label>Beskrivelse</label>
+        </div>
+
+        <div class="text-field">
+            <input type="number" name="item_price">
+            <span></span>
+            <label>Pris</label>
+        </div>
+
+        <div class="text-field">
+            <input type="text" name="item_url">
+            <span></span>
+            <label>Link</label>
+        </div>
+
+        <div class="commentary-box">
+            <input name="item_comment" type="text">
+            <span></span>
+            <label>Kommentar</label>
+        </div>
+        <input type="submit" value="Create Wish">
+    </form>
+</div>
+<div th:insert="fragments/footer :: footer"></div>
+</body>
+
+</html>

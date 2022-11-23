@@ -1,13 +1,43 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <title>Title</title>
+    <link rel="icon" type="image/x-icon" href="/img/well.png">
+    <title>Wishing Well | Wishlist</title>
 </head>
-<body>
+
+<body class="content">
 <div th:insert="fragments/navbar :: navbar"></div>
+
+<div>
+<table class="table">
+    <tr>
+        <th style="width: 200px">Beskrivelse</th>
+        <th style="width: 75px">Pris</th>
+        <th style="width: 200px">Link</th>
+        <th style="width: 200px">Kommentar</th>
+        <th style="width: 75px">Reserveret</th>
+    </tr>
+    <tr th:each="i : ${wishlist}">
+        <td th:text="${i.description}">Beskrivelse</td>
+        <td th:text="${i.price}">Pris</td>
+        <td th:text="${i.itemLink}">Link</td>
+        <td th:text="${i.comment}">Kommentar</td>
+        <!--<td th:text="${i.reserved}"></td>-->
+        <td><form method="post"><input type="checkbox" th:checked="${i.reserved ? true: false}" name="reserved"><input type="hidden" th:value="${i.id}" name='id'/><input type="submit" value="OK"></form></td>
+
+    </tr>
+</table>
+    <div style="padding-left: 30%; padding-right: 30%">
+        <a th:href="@{'/create-wish/' + ${id}}">
+            <input style="width: 800px; max-width: 100%;" type="submit" value="Create Wish">
+        </a>
+    </div>
+</div>
+
 <div th:insert="fragments/footer :: footer"></div>
 </body>
+
 </html>

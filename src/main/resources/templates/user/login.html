@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <title>Title</title>
+    <link rel="icon" type="image/x-icon" href="/img/well.png">
+    <title>Wishing Well | Login</title>
 </head>
 <body>
 
@@ -12,19 +13,34 @@
 <div th:insert="fragments/navbar :: navbar"></div>
 
 
-<div class="login">
+<div class="content" style="padding-left: 30%; padding-right: 30%">
+    <a href="/logout">
+        <input style="width: 800px; max-width: 100%;" type="submit" value="Logout">
+    </a>
+    <a href="/create-user">
+        <input style="width: 800px; max-width: 100%; margin-top: 1em" type="submit" value="Register">
+    </a>
+</div>
+
+<div class="box-of-user-prompts">
     <h1>Login</h1>
-    <div class="invalid_pass" th:if="${param.error}">
-        Invalid username and password
+    <div class="invalid_login" th:if="${param.error}">
+        Invalid credentials
     </div>
-    <form th:action="@{/login}" method="post">
+    <div class="valid_login" th:if="${param.success}">
+        Successfully logged in
+    </div>
+    <div class="invalid_login" th:if="${param.loggedin}">
+        Already logged in
+    </div>
+    <form th:action="@{/login}" method="post" th:object="${user}">
         <div class="text-field">
-            <input type="text" required>
+            <input th:field="*{userName}" type="text" required>
             <span></span>
             <label>Username</label>
         </div>
         <div class="text-field">
-            <input id="password" type="password" required>
+            <input th:field="*{password}" id="password" type="password" required>
             <span></span>
             <label>Password</label>
         </div>
@@ -34,6 +50,7 @@
             <label>Show Password</label>
         </div>
 
+        <!--Password visibility toggle-->
         <script>
             function togglePasswordVisibility() {
                 var x = document.getElementById("password");
@@ -43,10 +60,10 @@
                     x.type = "password";
                 }
             }
+
         </script>
 
         <input type="submit" value="Login">
-        <!--Password visibility toggle -->
 
     </form>
 </div>

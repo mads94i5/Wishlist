@@ -1,20 +1,12 @@
 package com.example.wishlist.srvs;
 
-import com.example.wishlist.dao.UserDto;
 import com.example.wishlist.dao.UserRepository;
-import com.example.wishlist.ents.Role;
 import com.example.wishlist.ents.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,23 +19,34 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User create(UserDto userDto) {
-        User user = new User(userDto.getUserName(),
-                encryption.encode(userDto.getPassword()),
-                userDto.getWishlistId(),
-                List.of(new Role("USER")));
-        return userRepo.create(user);
+    public User create(User user) {
+        User newUser = new User(user.getUserName(), encryption.encode(user.getPassword()));
+        return userRepo.createUser(newUser);
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepo.findByUserName(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("Invalid username or password.");
+    public boolean loginUser(String userName, String password) {
+        List<User> users = userRepo.getAllUsers();
+        for (User user : users) {
+            if ((userName.equals(user.getUserName())) && (encryption.matches(password, user.getPassword()))) {
+                return true;
+            }
         }
-        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+        return false;
     }
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+
+    @Override
+    public User findUserById(String id) {
+        return userRepo.findUserById(id);
+    }
+
+    @Override
+    public Long findIdByUser(User user) {
+        return userRepo.findIdByUser(user);
+    }
+
+    @Override
+    public String findUserNameById(String id) {
+        return userRepo.findUserNameById(id);
     }
 }

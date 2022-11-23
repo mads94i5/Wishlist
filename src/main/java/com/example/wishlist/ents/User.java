@@ -6,25 +6,19 @@ public class User {
     private Long id;
     private String userName;
     private String password;
-    private int wishlistId;
-    private Collection<Role> roles;
 
     public User() {
     }
 
-    public User(String userName, String password, int wishlistId, Collection<Role> roles) {
+    public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
-        this.wishlistId = wishlistId;
-        this.roles = roles;
     }
 
-    public User(Long id, String userName, String password, int wishlistId, Collection<Role> roles) {
+    public User(Long id, String userName, String password) {
         this.id = id;
         this.userName = userName;
         this.password = password;
-        this.wishlistId = wishlistId;
-        this.roles = roles;
     }
 
     public Long getId() {
@@ -49,21 +43,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getWishlistId() {
-        return wishlistId;
-    }
-
-    public void setWishlistId(int wishlistId) {
-        this.wishlistId = wishlistId;
-    }
-
-    public Collection<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
     }
 }

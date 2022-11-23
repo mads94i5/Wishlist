@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/img/well.png">
+    <title>Wishing Well | Wishlists</title>
+</head>
+
+<body class="content">
+<div th:insert="fragments/navbar :: navbar"></div>
+<div>
+<table class="table">
+  <tr>
+    <th>Wishlist ID</th>
+  </tr>
+  <tr th:each="wl : ${wishlists}">
+    <td th:text="${wl.id}">Wishlist ID</td>
+    <td><a th:href="@{'/wishlist/' + ${wl.id}}">Se ønskeliste</a></td>
+</table>
+  <div style="padding-left: 30%; padding-right: 30%">
+    <a href="/create-wishlist">
+      <input style="width: 800px; max-width: 100%;" type="submit" value="Create Wishlist">
+    </a>
+  </div>
+</div>
+<div th:insert="fragments/footer :: footer"></div>
+</body>
+</html>

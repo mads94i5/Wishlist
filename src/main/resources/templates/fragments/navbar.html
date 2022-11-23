@@ -1,19 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:position="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <title>Title</title>
 </head>
 <body>
+<div>
 <nav th:fragment="navbar">
-    <img class="navbarimage" src="img/well.png" width="35px" height="35px">
+    <img class="navbarimage" src="/img/well.png" width="35px" height="35px">
     <a href="/"><input type="button" value="Home"></a>
     <a href="/login"><input type="button" value="Login"></a>
-    <a href="/create-user"><input type="button" value="Sign up"></a>
-    <a href="/create-wishlist"><input type="button" value="Create wishlist"></a>
-    <a href="/wishlist"><input type="button" value="Show wishlist"></a>
-
+    <a href="/wishlists"><input type="button" value="Wishlists"></a>
 </nav>
+</div>
 </body>
 </html>

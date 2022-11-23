@@ -1,9 +1,10 @@
 nav {
-    background-color: lightgrey;
+    background: #1F2F98;
     text-align: center;
     width: 100%;
-    position: sticky;
-    top: 0px;
+    position: fixed;
+    top: 0;
+    z-index: 100;
 }
 
 #title {
@@ -14,33 +15,42 @@ nav {
     text-align: center;
 }
 
-.invalid_pass{
+.invalid_login{
     position: absolute;
     top: 68%;
     left: 50%;
     color: red;
 }
 
-.login {
+.valid_login{
+    position: absolute;
+    top: 68%;
+    left: 50%;
+    color: green;
+}
+
+.box-of-user-prompts {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
-    height: 350px;
+    min-height: 350px;
     background: white;
     border-radius: 10px;
+    margin-top: 50px;
+
 }
 
-.login h1 {
+.box-of-user-prompts h1 {
     font-family: montserrat, sans-serif;
     text-align: center;
     padding: 0 0 20px 0;
     border-bottom: 1px solid silver;
 }
 
-.login form{
-    padding: 0 40px;
+.box-of-user-prompts form{
+    padding: 0 40px 25px 40px;
     box-sizing: border-box;
 }
 
@@ -100,20 +110,20 @@ input[type="submit"]{
     font-size: 18px;
     color: white;
     font-weight: 700;
-    transform:translateY(10px);
 }
 
 input[type="submit"]:hover{
     border-color: #2691d9;
     transition: .5s;
     cursor: pointer;
+    text-decoration: underline;
 }
+
 
 .checkbox{
-    transform:translateY(-12px);
+    height: 25px;
+    padding: 0 0 5px 0;
 }
-
-
 
 
 p {
@@ -126,7 +136,7 @@ nav a {
 }
 
 input[type=button] {
-    background-color: darkgray;
+    background: #1F2F98;
     color: white;
     height: 50px;
     min-width: 100px;
@@ -135,7 +145,7 @@ input[type=button] {
 }
 
 input[type=button]:hover {
-    background-color: grey;
+    background-color: #2691d9;
     text-decoration: underline;
 }
 
@@ -148,13 +158,14 @@ body {
     margin: 0;
     padding: 0;
     font-family: montserrat, sans-serif;
-    background: linear-gradient(0deg, #1F2F98, #2EAAFA);
+    background: linear-gradient(0deg, #1F2F98, #2EAAFA) no-repeat fixed center;
     height: 100vh;
     overflow: hidden;
+    background-size: cover;
 }
 
 .center {
-    position: absolute;;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%)
@@ -167,7 +178,7 @@ body {
 }
 
 .row {
-    margin-top: 120px;
+    margin-top: 220px;
     display: flex;
 }
 
@@ -181,18 +192,23 @@ body {
     flex: 50%;
     margin-right: 120px;
     margin-left: 30px;
+    margin-bottom: 105px;
     text-align: justify;
+    background-color: white;
+    border-radius: 12px;
 }
 
 
 footer {
-    background: darkgray;
+    background: #1F2F98;
+    margin-top: -5px;
     position: fixed;
     bottom: 0px;
     width: 100%;
     min-height: 7em;
     max-height: 6em;
     font-size: 0.8em;
+    z-index: 100;
 }
 
 .footer-logo {
@@ -208,6 +224,39 @@ footer {
     margin: -0.5em 25% -6.5em;
 }
 
+.commentary-box input{
+    width: 100%;
+    padding: 0 5px;
+    height: 80px;
+    font-size: 16px;
+    border: none;
+    background: #7dafd1;
+    outline: none;
+    border-radius: 25px;
+}
+
+.commentary-box label{
+    position: absolute;
+    top: 72%;
+    left: 50px;
+    color: white;
+    pointer-events: none;
+    transition: 0.2s;
+}
+
+.commentary-box input:focus ~ label{
+    color: #7dafd1;
+    top: 69%;
+}
+
+.password-mismatch-message{
+    color: red;
+}
+
+.success-message{
+    color: green;
+}
+
 .footer-right-column {
     float: right;
     width: 20%;
@@ -219,4 +268,42 @@ footer {
 .footer-text {
     text-align: center;
     color: white;
+}
+
+table {
+    margin: auto;
+}
+
+.create-wishlist-buttons{
+    width: 200%;
+    height: 200%;
+}
+
+.create-wishlist-buttons:hover{
+    cursor:pointer;
+    text-decoration: underline;
+}
+
+th {
+    border: 2px solid black;
+    border-collapse: collapse;
+    min-width: 50px;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+}
+
+td  {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.content{
+    height: 100%;
+    overflow: scroll;
+    margin-bottom: 10em;
+    margin-top: 5em;
 }
